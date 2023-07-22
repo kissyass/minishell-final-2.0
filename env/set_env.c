@@ -5,7 +5,7 @@ char **ft_set_env(char **envp, int size)
     char **env;
     int i;
 
-    env = malloc(sizeof(char *) * size);
+    env = malloc(sizeof(char *) * (size + 1)); // 
     if (!env)
         return (NULL);
     i = -1;
