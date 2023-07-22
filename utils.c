@@ -1,5 +1,8 @@
 #include "minishell.h"
 
+#include <stdio.h>
+#include <fcntl.h>
+
 int ft_strlen_double(char **str)
 {
     int i;
@@ -13,13 +16,32 @@ int ft_strlen_double(char **str)
 int ft_execute_cmds(char **cmd, char **env)
 {
     char *path;
+    pid_t pid;
+    int status;
 
-    path = cmd[0];
-    execve(path, cmd, env);
-    path = ft_strcat("/bin/", cmd[0]);
-    execve(path, cmd, env);
-    path = ft_strcat("/usr/bin/", cmd[0]);
-    execve(path, cmd, env);
+    pid = fork();
+
+    if (pid == 0)
+    {
+        //Child process
+        path = cmd[0];
+        execve(path, cmd, env);
+        path = ft_strcat("/bin/", cmd[0]);
+        execve(path, cmd, env);
+        path = ft_strcat("/usr/bin/", cmd[0]);
+        execve(path, cmd, env);
+    }
+    else if (pid < 0)
+    {
+        //Fork failed
+    }
+    else
+    {
+        //Parent process
+        waitpid(pid, &status, 0); // wait for the child process
+    }
+
+
     return (-1);
 }
 
