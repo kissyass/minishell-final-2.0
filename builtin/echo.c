@@ -56,11 +56,11 @@ int ft_check_input(t_builtin *built)
                 return (0);
             }
         }
-        else
-        {
-            if ()
-        }
-            built->output = ft_charcat(built->output, built->input[i]);
+        //else
+        //{
+        //    if ()
+        //}
+        //    built->output = ft_charcat(built->output, built->input[i]);
     }
     return (1);
 }
@@ -123,7 +123,7 @@ void ft_output(t_builtin *built, char quote)
                 built->output = ft_charcat(built->output, '\\');
         }
     }
-    
+
 }
 
 char *ft_charcat(char *s, char c)
