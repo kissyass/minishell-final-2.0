@@ -38,7 +38,8 @@ typedef struct s_builtin
     char *output;
     int start;
     int end;
-    //int bslash;
+    char **env;
+    int env_size;
 } t_builtin;
 
 
@@ -74,7 +75,13 @@ int ft_output_len(char *cmd, char *str);
 int ft_check_input(t_builtin *built);
 void ft_output(t_builtin *built, char quote);
 int ft_backslash(t_builtin *built, int i, char quote);
-
+//cd_pwd
+void ft_cd(t_minishell *mini);
+void ft_pwd(t_minishell *mini);
+//export
+void ft_export(t_minishell *mini);
+void ft_sort_export(t_builtin *built);
+void ft_swap(char **s1, char **s2);
 
 //utils
 int	ft_strcmp (char *s1, char *s2);
