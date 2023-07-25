@@ -65,14 +65,22 @@ void ft_perror(char *error);
 void ft_builtin(t_minishell *mini);
 //echo
 void ft_echo(t_minishell *mini);
-int ft_check_input(t_builtin *built);
 int ft_check_quotes(t_builtin *built, int index, char quote);
 void ft_quote(t_builtin *built, char quote, int type);
-char *ft_charcat(char *s, char c);
+int ft_space_check(int index, char *input);
+int ft_quotes_index(t_builtin *built, int index, char quote);
+//input_output
+int ft_output_len(char *cmd, char *str);
+int ft_check_input(t_builtin *built);
 void ft_output(t_builtin *built, char quote);
+int ft_backslash(t_builtin *built, int i, char quote);
+
 
 //utils
 int	ft_strcmp (char *s1, char *s2);
+int	ft_cmdcmp(char *s1, char *s2);
+char *ft_charcat(char *s, char c);
+char *ft_strdup2(char *str, char *cmd);
 
 
 #endif

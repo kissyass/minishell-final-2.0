@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykissiko <ykissiko@student.42istanbul.com  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/25 17:07:56 by ykissiko          #+#    #+#             */
+/*   Updated: 2023/07/25 17:07:59 by ykissiko         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 #include <fcntl.h>
 #include <errno.h>
@@ -49,36 +61,36 @@ int check_redirects(char **args,int *fds){
 
 void ft_builtin(t_minishell *mini)
 {
-    int fds_rec[2];
-    int fds_red[2];
+    // int fds_rec[2];
+    // int fds_red[2];
 
-    (fds_red[0] = -1, fds_red[1] = -1);
-    (fds_rec[0] = -1, fds_rec[1] = -1);
+    // (fds_red[0] = -1, fds_red[1] = -1);
+    // (fds_rec[0] = -1, fds_rec[1] = -1);
 
     //printf("NEREDESIN BRE GAFI\n");
     mini->cmd = ft_split(mini->input, ' ');
 
 
-    if (check_redirects(mini->cmd, fds_red)){
+    // if (check_redirects(mini->cmd, fds_red)){
 
-        if (fds_red[0] != -1)
-        {
-            fds_rec[0] = dup(0);
-            if (dup2(0,fds_red[0]) == -1 && close(fds_red[0]))
-            { /* exit */ }
-        }
-        if (fds_red[1] != -1)
-        {
-            printf("NEREDESIN BRE GAFIL\n");
-            fds_rec[1] = dup(1);
-            if (dup2(1,fds_red[1]) == -1 && close(fds_red[1]))
-            { /* exit */ }
+    //     if (fds_red[0] != -1)
+    //     {
+    //         fds_rec[0] = dup(0);
+    //         if (dup2(0,fds_red[0]) == -1 && close(fds_red[0]))
+    //         { /* exit */ }
+    //     }
+    //     if (fds_red[1] != -1)
+    //     {
+    //         printf("NEREDESIN BRE GAFIL\n");
+    //         fds_rec[1] = dup(1);
+    //         if (dup2(1,fds_red[1]) == -1 && close(fds_red[1]))
+    //         { /* exit */ }
 
-        }
-    }
+    //     }
+    // }
 
-    //if (ft_strcmp(mini->cmd[0], "echo"))
-    //    ft_echo(mini);
+    if (ft_cmdcmp(mini->cmd[0], "echo"))
+        ft_echo(mini);
     /*else if (ft_strcmp(mini->cmd[0], "cd"))
         ft_cd(mini);
     else if (ft_strcmp(mini->cmd[0], "pwd"))
@@ -91,15 +103,21 @@ void ft_builtin(t_minishell *mini)
         ft_env(mini->env);
     else if (ft_strcmp(mini->cmd[0], "exit"))
         ft_exit(mini);*/
-    //else
+    else
         ft_execute_cmds(mini->cmd, mini->env);
     ft_free_array_char(mini->cmd, ft_count(mini->input, ' '));
+
+
+
+
+
+
     //printf("NEREDESIN BRE GFI\n");
     // recover standard inputs
-    if (fds_rec[0] != -1)
-        if (dup2(0,fds_rec[0]) == -1 && close(fds_rec[0] == -1))
-            { /* exit */ }
-    if (fds_rec[1] != -1)
-        if (dup2(1,fds_rec[1]) == -1  && close(fds_rec[0] == -1))
+    // if (fds_rec[0] != -1)
+    //     if (dup2(0,fds_rec[0]) == -1 && close(fds_rec[0] == -1))
+    //         { /* exit */ }
+    // if (fds_rec[1] != -1)
+    //     if (dup2(1,fds_rec[1]) == -1  && close(fds_rec[0] == -1))
             { /* exit */ }
 }

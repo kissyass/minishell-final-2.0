@@ -2,7 +2,7 @@ NAME		= minishell
 CC			= gcc
 CFLAGS		=  -Wall -Wextra -Werror -g
 RM			= rm -f
-SRCS	=	main.c utils.c pipes/pipes.c env/set_env.c builtin/builtin.c builtin/echo.c builtin/utils.c
+SRCS	=	main.c utils.c pipes/pipes.c env/set_env.c builtin/builtin.c builtin/echo.c builtin/input_output.c builtin/utils.c
 OBJS = $(SRCS:.c=.o)
 LIBFT       = libft.a
 LIBFT_DIR := libft
