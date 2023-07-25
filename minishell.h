@@ -8,23 +8,56 @@
 # include <readline/history.h>
 # include <string.h>
 # include <limits.h>
-#include <sys/wait.h>
+# include <sys/wait.h>
+# include <fcntl.h>
+# include <errno.h>
 
 # include "libft/libft.h"
 
+# define TRUE 1
+# define FALSE 0
+# define DOLLAR_OP '$'
+# define DOUBLE_QUOTE '"'
+# define SINGLE_QUOTE '\''
+# define CHILD_PROCESS 0
+# define MAIN_PROCESS 1
+# define REPLACE 1
+# define APPEND 0
+
+enum e_ttype
+{
+    PIPE = 1,
+    STRING,
+    HERE_DOC,
+    RED_INPUT,
+    RED_APPEND,
+    RED_OUTPUT
+};
+
 typedef struct s_minishell
 {
-    char **env;
+    int parent_pid;
+    int procces_count;
+    int ignore;
     int env_size;
-    char *input;
+    char **env;
     char **cmd;
+    char *input;
+    t_pipes *process;
 } t_minishell;
+
+extern t_minishell	g_ms;
 
 typedef struct s_pipes
 {
-    int cmd_num;
     pid_t *pid;
-    int **fd;
+    int fd[2];
+    int heredoc_fd[2];
+    char **execute;
+    char **redirects;
+    struct s_pipes *prev;
+    struct s_pipes *next;
+    int cmd_num;
     char **input;
     char **cmd;
 
@@ -48,6 +81,14 @@ int ft_execute_cmds(char **cmd, char **env);
 char *ft_strcat(char *s1, char *s2);
 void ft_free_array_char(char **arr, int size);
 void ft_free_array_int(int **arr, int size);
+
+//redirect
+void	input(char *file);
+void	output(char *file, int mode);
+
+//utils
+int	is_operator(char *str);
+int	is_parent(void);
 
 //ENV
 //set_env
