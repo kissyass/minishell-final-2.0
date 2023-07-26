@@ -42,11 +42,12 @@ typedef struct s_minishell
     int env_size;
     char **env;
     char **cmd;
+    char **paths;
     char *input;
     t_pipes *process;
 } t_minishell;
 
-extern t_minishell	g_ms;
+t_minishell	g_ms;
 
 typedef struct s_pipes
 {
@@ -76,6 +77,9 @@ typedef struct s_builtin
 } t_builtin;
 
 
+//free
+void	free_array(char *arr);
+
 //UTILS
 int ft_strlen_double(char **str);
 int ft_execute_cmds(char **cmd, char **env);
@@ -91,9 +95,11 @@ void	output(char *file, int mode);
 int	is_operator(char *str);
 int	is_parent(void);
 
+
 //ENV
 //set_env
 char **ft_set_env(char **envp, int size);
+void	set_paths(void);;
 
 //PIPES
 void ft_pipes(t_minishell *mini);
