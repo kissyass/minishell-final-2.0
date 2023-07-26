@@ -1,4 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/26 17:29:23 by aeroglu           #+#    #+#             */
+/*   Updated: 2023/07/26 17:38:56 by aeroglu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
+void    init_app(char **env)
+{
+    errno = 0;
+    g_ms.paths = NULL;
+    g_ms.parent_pid = getpid();
+    ft_set_env(env, g_ms.env_size);
+    set_paths();
+}
+
+void    init_shell(char *input)
+{
+    g_ms.process = NULL;
+    g_ms.procces_count = NULL;
+    tok
+}
 
 int main(int argc, char **argv, char **envp)
 {
