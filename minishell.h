@@ -24,7 +24,7 @@
 # define REPLACE 1
 # define APPEND 0
 
-/*enum e_ttype
+enum e_ttype
 {
     PIPE = 1,
     STRING,
@@ -34,37 +34,42 @@
     RED_OUTPUT
 };
 
+typedef struct s_token
+{
+    char            *str;
+    enum e_ttype    type;
+    struct s_token  *prev;
+    struct s_token  *next;
+}   t_token;
+
 typedef struct s_minishell
 {
-    int parent_pid;
-    int procces_count;
-    int ignore;
-    int env_size;
-    char **env;
-    char **cmd;
-    char **paths;
-    char *input;
+    int     parent_pid;
+    int     procces_count;
+    int     ignore;
+    int     env_size;
+    char    **env;
+    char    **cmd;
+    char    **paths;
+    char    *input;
+    t_token *token;
     t_pipes *process;
 } t_minishell;
 
 t_minishell	g_ms;
 
-typedef struct s_pipes
+typedef struct s_process
 {
-    pid_t *pid;
-    int fd[2];
-    int heredoc_fd[2];
-    char **execute;
-    char **redirects;
-    struct s_pipes *prev;
-    struct s_pipes *next;
-    int cmd_num;
-    char **input;
-    char **cmd;
+	pid_t				pid;
+	int					fd[2];
+	int					heredoc_fd[2];
+	char				**execute;
+	char				**redirects;
+	struct s_process	*prev;
+	struct s_process	*next;
+}	t_process;
 
-}   t_pipes;*/
-
-typedef struct s_pipes
+/* typedef struct s_pipes
 {
     int cmd_num;
     pid_t *pid;
@@ -92,8 +97,11 @@ typedef struct s_builtin
     int end;
     char **env;
     int env_size;
-} t_builtin;
+} t_builtin; */
 
+//tokenize
+int	token_addback(t_token **token, t_token *new_token, int plus);
+void	parse_token_string(char **str);
 
 //free
 void	free_array(char *arr);
@@ -104,10 +112,13 @@ int ft_execute_cmds(char **cmd, char **env);
 char *ft_strcat(char *s1, char *s2);
 void ft_free_array_char(char **arr, int size);
 void ft_free_array_int(int **arr, int size);
+int	is_whitespace(char c);
+int	contain_heredoc(t_process *process);
 
 //redirect
 void	input(char *file);
 void	output(char *file, int mode);
+void	fill_all_heredoc(void);
 
 //utils
 int	is_operator(char *str);
