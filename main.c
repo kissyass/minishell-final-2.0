@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:29:23 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/26 17:38:56 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/26 20:43:40 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,42 @@ void    init_shell(char *input)
 {
     g_ms.process = NULL;
     g_ms.procces_count = NULL;
-    tok
+    tokenize(input);
+    /*if (!lexer())
+        return;*/
+    start_cmd
 }
 
 int main(int argc, char **argv, char **envp)
 {
-    t_minishell mini;
+    //t_minishell mini;#
+    char    *input;
 
     (void)argc;
     (void)argv;
-    mini.env_size = ft_strlen_double(envp);
-    mini.env = ft_set_env(envp, mini.env_size);
+    /*mini.env_size = ft_strlen_double(envp);
+    mini.env = ft_set_env(envp, mini.env_size);*/
+    init_app(envp);
     rl_bind_key('\t', rl_complete); // Enable tab-completion
-    while (1) 
+
+    while (argc && argv)
+    {
+        g_ms.ignore = FALSE;
+        write(1, "\033[32m", 5);
+		input = readline(">>> ");
+		write(1, "\033[0m", 4);
+        if (g_ms.ignore)
+        {
+            free(input);
+            input = malloc(1);
+        }
+        if (*input)
+        {
+
+        }
+    }
+
+    /*while (1)
     {
         mini.input = readline(">>> "); // Read user input
         add_history(mini.input); // Add input to history
@@ -49,7 +72,7 @@ int main(int argc, char **argv, char **envp)
                 ft_builtin(&mini);
         }
         free(mini.input);
-    }
+    }*/
     ft_free_array_char(mini.env, mini.env_size);
     return 0;
 }
