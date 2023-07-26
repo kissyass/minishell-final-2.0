@@ -24,7 +24,7 @@
 # define REPLACE 1
 # define APPEND 0
 
-enum e_ttype
+/*enum e_ttype
 {
     PIPE = 1,
     STRING,
@@ -61,7 +61,25 @@ typedef struct s_pipes
     char **input;
     char **cmd;
 
+}   t_pipes;*/
+
+typedef struct s_pipes
+{
+    int cmd_num;
+    pid_t *pid;
+    int **fd;
+    char **input;
+    char **cmd;
+
 }   t_pipes;
+
+typedef struct s_minishell
+{
+    char **env;
+    int env_size;
+    char *input;
+    char **cmd;
+} t_minishell;
 
 typedef struct s_builtin
 {
