@@ -14,6 +14,9 @@
 
 void ft_builtin(t_minishell *mini)
 {
+    mini->cmd = ft_split(mini->input, ' ');
+    printf("builtinf\n");
+    printf("%s, %d\n", mini->cmd[0], ft_cmdcmp(mini->cmd[0], "export"));
     if (mini->cmd[0] && ft_cmdcmp(mini->cmd[0], "echo"))
         ft_echo(mini);
     else if (ft_cmdcmp(mini->cmd[0], "cd"))

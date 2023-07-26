@@ -14,6 +14,7 @@
 
 void ft_export(t_minishell *mini)
 {
+    printf("inside export\n");
     int i;
     t_builtin built;
 
