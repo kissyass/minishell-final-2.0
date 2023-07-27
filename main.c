@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:29:23 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/26 20:43:40 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/27 17:40:30 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void    init_app(char **env)
 void    init_shell(char *input)
 {
     g_ms.process = NULL;
-    g_ms.procces_count = NULL;
+    g_ms.process_count = NULL;
     tokenize(input);
     /*if (!lexer())
         return;*/
-    start_cmd
+    start_cmd();
 }
 
 int main(int argc, char **argv, char **envp)
@@ -56,10 +56,12 @@ int main(int argc, char **argv, char **envp)
         }
         if (*input)
         {
-
+            init_shell(input);
+            add_history(input);
         }
+        free(input);
     }
-
+    exit(errno);
     /*while (1)
     {
         mini.input = readline(">>> "); // Read user input
@@ -72,7 +74,7 @@ int main(int argc, char **argv, char **envp)
                 ft_builtin(&mini);
         }
         free(mini.input);
-    }*/
-    ft_free_array_char(mini.env, mini.env_size);
+    }
+    ft_free_array_char(mini.env, mini.env_size);*/
     return 0;
 }
