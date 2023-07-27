@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 20:46:35 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/26 20:57:02 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/27 17:20:07 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	close_all_fd(void)
 	while (process)
 	{
 		close_heredoc_fd(process);
-		if (process)
+		if (process->fd[0] > 2)
+			close(process->fd[2]);
+		if (process->fd[1] > 2)
+			close(process->fd[1]);
+		process = process->next;
 	}
 }
