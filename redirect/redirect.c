@@ -6,13 +6,13 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 20:33:28 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/25 21:22:11 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/27 17:31:33 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	get_all_inputs(t_pipes *process)
+void	get_all_inputs(t_process *process)
 {
 	int		i;
 	char	**redirects;
@@ -29,7 +29,7 @@ void	get_all_inputs(t_pipes *process)
 	}
 }
 
-void	set_all_outputs(t_pipes *process)
+void	set_all_outputs(t_process *process)
 {
 	int	i;
 	char	**redirects;
@@ -50,7 +50,7 @@ void	fill_all_heredoc(void)
 {
 	int		i;
 	char	**redirects;
-	t_pipes	*process;
+	t_process	*process;
 
 	process = g_ms.process;
 	while (process)
