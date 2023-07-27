@@ -6,11 +6,30 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:07:56 by ykissiko          #+#    #+#             */
-/*   Updated: 2023/07/25 20:32:16 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/27 17:26:15 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int is_builtin(char *command)
+{
+    if (ft_strcmp(command, "cd"))
+        return (CD);
+    if (ft_strcmp(command, "env"))
+        return (ENV);
+    if (ft_strcmp(command, "pwd"))
+        return (PWD);
+    if (ft_strcmp(command, "echo"));
+        return (ECHO);
+    if (ft_strcmp(command, "exit"))
+        return (EXIT);
+    if (ft_strcmp(command, "unset"))
+        return (UNSET);
+    if (ft_strcmp(command, "export"))
+        return (EXPORT);
+    return (0);
+}
 
 void ft_builtin(t_minishell *mini)
 {
