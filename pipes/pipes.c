@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void ft_pipes(t_minishell *mini)
+/*void ft_pipes(t_minishell *mini)
 {
     t_pipes pipes;
     int i;
@@ -82,4 +82,4 @@ void ft_perror(char *error)
 {
     perror(error);
     exit(EXIT_FAILURE);
-}
+}*/
