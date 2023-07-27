@@ -34,6 +34,17 @@ enum e_ttype
     RED_OUTPUT
 };
 
+enum    e_builtin_types //We need control to builtin types
+{
+    CD = 1,
+    ENV,
+    PWD,
+    ECHO,
+    EXIT,
+    UNSET,
+    EXPORT
+};
+
 typedef struct s_token
 {
     char            *str;
@@ -45,7 +56,7 @@ typedef struct s_token
 typedef struct s_minishell
 {
     int     parent_pid;
-    int     procces_count;
+    int     process_count;
     int     ignore;
     int     env_size;
     char    **env;
@@ -53,7 +64,7 @@ typedef struct s_minishell
     char    **paths;
     char    *input;
     t_token *token;
-    t_pipes *process;
+    t_process *process;
 } t_minishell;
 
 t_minishell	g_ms;
@@ -99,12 +110,27 @@ typedef struct s_builtin
     int env_size;
 } t_builtin; */
 
+//error
+void	token_err(int type);
+
+//lexer
+t_process	*init_process(void);
+void	process_addback(t_process **process, t_process *new_process);
+void	push_new_str(char **new_str, char *str);
+char	*clean_quote(char *str);
+char	**push_array(char **arg_arr, char *str);
+
+//cmd
+void	close_all_fd(void);
+void	start_cmd(void);
+
 //tokenize
 int	token_addback(t_token **token, t_token *new_token, int plus);
 void	parse_token_string(char **str);
 
 //free
 void	free_array(char *arr);
+void	free_token(void);
 
 //UTILS
 int ft_strlen_double(char **str);
@@ -119,6 +145,8 @@ int	contain_heredoc(t_process *process);
 void	input(char *file);
 void	output(char *file, int mode);
 void	fill_all_heredoc(void);
+void	get_all_inputs(t_process *process);
+void	set_all_outputs(t_process *process);
 
 //utils
 int	is_operator(char *str);
@@ -128,21 +156,23 @@ int	is_parent(void);
 //ENV
 //set_env
 char **ft_set_env(char **envp, int size);
-void	set_paths(void);;
+void	set_paths(void);
+char    *get_env(char *str);
 
 //PIPES
-void ft_pipes(t_minishell *mini);
+/*void ft_pipes(t_minishell *mini);
 void ft_close(t_pipes *pipes, int i);
 void ft_dup2(t_pipes *pipes, t_minishell *mini, int i);
 void set_pipes(t_pipes *pipes, t_minishell *mini, int set);
-void ft_perror(char *error);
+void ft_perror(char *error);*/
 
 //BUILTIN
 //builtin
 void ft_builtin(t_minishell *mini);
+int is_builtin(char *command);
 //echo
 void ft_echo(t_minishell *mini);
-int ft_check_quotes(t_builtin *built, int index, char quote);
+/*int ft_check_quotes(t_builtin *built, int index, char quote);
 void ft_quote(t_builtin *built, char quote, int type);
 int ft_space_check(int index, char *input);
 int ft_quotes_index(t_builtin *built, int index, char quote);
@@ -157,7 +187,7 @@ void ft_pwd(t_minishell *mini);
 //export
 void ft_export(t_minishell *mini);
 void ft_sort_export(t_builtin *built);
-void ft_swap(char **s1, char **s2);
+void ft_swap(char **s1, char **s2);*/
 
 //utils
 int	ft_strcmp (char *s1, char *s2);
