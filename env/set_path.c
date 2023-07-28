@@ -6,11 +6,25 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:27:15 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/26 17:36:03 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/28 20:04:30 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	check_dir(char *cmd)
+{
+	DIR	*dir;
+
+	if (!cmd)
+		exit(EXIT_SUCCESS);
+	dir = opendir(cmd);
+	if (dir && readdir(dir))
+	{
+		closedir(dir);
+		directory_err(cmd);
+	}
+}
 
 void	set_paths(void)
 {
@@ -24,4 +38,37 @@ void	set_paths(void)
 	else
 		g_ms.paths = ft_split(path, ':');
 	free(path);
+}
+
+char	*mimi_ret_free(char *mim, char *path)
+{
+	free(mim);
+	return (path);
+}
+
+char	*get_path(char *cmd)
+{
+	char	*path;
+	char	**paths;
+	char	*new_cmd;
+
+	check_dir(cmd);
+	if (!access(cmd, F_OK))
+		return (ft_strdup(cmd));
+	paths = g_ms.paths;
+	if (!paths)
+		command_err(cmd);
+	new_cmd = ft_strjoin("/", cmd);
+	while (*paths)
+	{
+		path = ft_strjoin(*paths, new_cmd);
+		if (!access(path, F_OK))
+			return (mimi_ret_free(new_cmd, path));
+		free(path);
+		paths++;
+	}
+	if (ft_strchr(cmd, '/'))
+		no_file_err(cmd);
+	free(new_cmd);
+	return (NULL);
 }

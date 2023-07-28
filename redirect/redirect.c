@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 20:33:28 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/27 17:31:33 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/28 19:39:26 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	get_all_inputs(t_process *process)
 	{
 		if (is_operator(redirects[i]) == RED_INPUT)
 			input(redirects[i + 1]);
-		else if (is_operator(redirects[i] == HERE_DOC))
+		else if (is_operator(redirects[i]) == HERE_DOC)
 			dup2(process->heredoc_fd[0], 0);
 		i += 2;
 	}

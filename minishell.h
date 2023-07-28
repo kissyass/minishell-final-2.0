@@ -10,6 +10,7 @@
 # include <limits.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <dirent.h>
 # include <errno.h>
 
 # include "libft/libft.h"
@@ -53,22 +54,6 @@ typedef struct s_token
     struct s_token  *next;
 }   t_token;
 
-typedef struct s_minishell
-{
-    int     parent_pid;
-    int     process_count;
-    int     ignore;
-    int     env_size;
-    char    **env;
-    char    **cmd;
-    char    **paths;
-    char    *input;
-    t_token *token;
-    t_process *process;
-} t_minishell;
-
-t_minishell	g_ms;
-
 typedef struct s_process
 {
 	pid_t				pid;
@@ -79,6 +64,21 @@ typedef struct s_process
 	struct s_process	*prev;
 	struct s_process	*next;
 }	t_process;
+
+typedef struct s_minishell
+{
+    int         parent_pid;
+    int         process_count;
+    int         ignore;
+    int         env_size;
+    char        **env;
+    char        **paths;
+    t_token     *token;
+    t_process   *process;
+}               t_minishell;
+
+t_minishell	g_ms;
+
 
 /* typedef struct s_pipes
 {
@@ -110,8 +110,14 @@ typedef struct s_builtin
     int env_size;
 } t_builtin; */
 
+//tokenize
+void	tokenize(char *str);
+
 //error
 void	token_err(int type);
+void	directory_err(char *str);
+void	command_err(char *str);
+void	no_file_err(char *str);
 
 //lexer
 t_process	*init_process(void);
@@ -119,17 +125,21 @@ void	process_addback(t_process **process, t_process *new_process);
 void	push_new_str(char **new_str, char *str);
 char	*clean_quote(char *str);
 char	**push_array(char **arg_arr, char *str);
+int	    lexer(void);
+char	*dollar(char *str);
 
 //cmd
 void	close_all_fd(void);
 void	start_cmd(void);
+void	run_cmd(t_process *process);
 
 //tokenize
 int	token_addback(t_token **token, t_token *new_token, int plus);
 void	parse_token_string(char **str);
+t_token	*init_token(char *str, enum e_ttype type);
 
 //free
-void	free_array(char *arr);
+void	free_array(char **arr);
 void	free_token(void);
 
 //UTILS
@@ -140,6 +150,7 @@ void ft_free_array_char(char **arr, int size);
 void ft_free_array_int(int **arr, int size);
 int	is_whitespace(char c);
 int	contain_heredoc(t_process *process);
+int	ft_strcmp(const char *s1, const char *s2);
 
 //redirect
 void	input(char *file);
@@ -147,6 +158,7 @@ void	output(char *file, int mode);
 void	fill_all_heredoc(void);
 void	get_all_inputs(t_process *process);
 void	set_all_outputs(t_process *process);
+void	heredoc(int *fd, char *endline);
 
 //utils
 int	is_operator(char *str);
@@ -155,9 +167,11 @@ int	is_parent(void);
 
 //ENV
 //set_env
-char **ft_set_env(char **envp, int size);
+//char **ft_set_env(char **envp, int size);
+void	set_env(char **env);
 void	set_paths(void);
 char    *get_env(char *str);
+char	*get_path(char *cmd);
 
 //PIPES
 /*void ft_pipes(t_minishell *mini);
@@ -171,7 +185,7 @@ void ft_perror(char *error);*/
 void ft_builtin(t_minishell *mini);
 int is_builtin(char *command);
 //echo
-void ft_echo(t_minishell *mini);
+//void ft_echo(t_minishell *mini);
 /*int ft_check_quotes(t_builtin *built, int index, char quote);
 void ft_quote(t_builtin *built, char quote, int type);
 int ft_space_check(int index, char *input);
@@ -190,7 +204,7 @@ void ft_sort_export(t_builtin *built);
 void ft_swap(char **s1, char **s2);*/
 
 //utils
-int	ft_strcmp (char *s1, char *s2);
+//int	ft_strcmp (char *s1, char *s2);
 int	ft_cmdcmp(char *s1, char *s2);
 char *ft_charcat(char *s, char c);
 char *ft_strdup2(char *str, char *cmd);

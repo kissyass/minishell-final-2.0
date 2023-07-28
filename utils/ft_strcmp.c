@@ -1,46 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 17:32:15 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/27 21:19:49 by aeroglu          ###   ########.fr       */
+/*   Created: 2023/07/28 19:45:55 by aeroglu           #+#    #+#             */
+/*   Updated: 2023/07/28 19:45:58 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	free_array(char *arr)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
-
-	i = 0;
-	while (arr[i])
+	if (!s1 || !s2)
+		return (FALSE);
+	while (*s1 || *s2)
 	{
-		free(arr[i]);
-		i++;
+		if (*s1 != *s2)
+			return (FALSE);
+		s1++;
+		s2++;
 	}
-	free(arr);
-}
-
-void	free_token(void)
-{
-	t_token	*tmp;
-	t_token	*token;
-
-	token = g_ms.token;
-	while (token)
-	{
-		free(token->str);
-		token = token->next;
-	}
-	token = g_ms.token;
-	while (token)
-	{
-		tmp = token;
-		token = token->next;
-		free(tmp);
-	}
+	return (TRUE);
 }

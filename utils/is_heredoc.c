@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 20:47:50 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/26 20:50:18 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/28 19:44:54 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	contain_heredoc(t_process *process)
 	i = 0;
 	while (process->redirects[i])
 	{
-		if (is_operator(process->redirects[i] == HERE_DOC))
+		if (is_operator(process->redirects[i]) == HERE_DOC)
 			return (TRUE);
 		i++;
 	}

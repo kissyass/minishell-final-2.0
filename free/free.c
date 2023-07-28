@@ -1,35 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 20:46:35 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/28 19:27:38 by aeroglu          ###   ########.fr       */
+/*   Created: 2023/07/26 17:32:15 by aeroglu           #+#    #+#             */
+/*   Updated: 2023/07/28 19:34:38 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	close_heredoc_fd(t_process *process)
+void	free_array(char **arr)
 {
-	if (contain_heredoc(process) && process->heredoc_fd[0] > 2)
-		close(process->heredoc_fd[0]);
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
 
-void	close_all_fd(void)
+void	free_token(void)
 {
-	t_process	*process;
+	t_token	*tmp;
+	t_token	*token;
 
-	process = g_ms.process;
-	while (process)
+	token = g_ms.token;
+	while (token)
 	{
-		close_heredoc_fd(process);
-		if (process->fd[0] > 2)
-			close(process->fd[0]);
-		if (process->fd[1] > 2)
-			close(process->fd[1]);
-		process = process->next;
+		free(token->str);
+		token = token->next;
+	}
+	token = g_ms.token;
+	while (token)
+	{
+		tmp = token;
+		token = token->next;
+		free(tmp);
 	}
 }

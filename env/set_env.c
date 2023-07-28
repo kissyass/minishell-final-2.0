@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-char **ft_set_env(char **envp, int size)
+/*char **ft_set_env(char **envp, int size)
 {
     char **env;
     int i;
@@ -15,6 +15,22 @@ char **ft_set_env(char **envp, int size)
     while (++i < size)
         env[i] = NULL;
     return(env);
+}*/
+
+void	set_env(char **env)
+{
+	size_t	i;
+	size_t	len;
+	char	**head;
+
+	head = env;
+	while (*head)
+		head++;
+	len = head - env;
+	g_ms.env = ft_calloc(sizeof(char **), len + 1);
+	i = -1;
+	while (++i < len)
+		g_ms.env[i] = ft_strdup(env[i]);
 }
 
 char    *split_env(char *str)
@@ -34,7 +50,7 @@ char    *get_env(char *str)
     env = g_ms.env;
     new_str = ft_strjoin(str, "=");
     len = ft_strlen(new_str);
-    while (*env)
+    while (env && *env)
     {
         if (!ft_strncmp(*env, new_str, len))
         {

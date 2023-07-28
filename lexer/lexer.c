@@ -6,13 +6,13 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:09:19 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/27 20:18:41 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/28 19:37:57 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	appenf_arguments(t_token **token, t_process *process)
+int	append_arguments(t_token **token, t_process *process)
 {
 	char	*data;
 	if ((*token)->type == STRING)
@@ -34,7 +34,7 @@ int	appenf_arguments(t_token **token, t_process *process)
 				token_err((*token)->type);
 			return (FALSE);
 		}
-		data = clean_quote((*token)->type);
+		data = clean_quote((*token)->str);
 		process->redirects = push_array(process->redirects, data);
 	}
 	return (TRUE);

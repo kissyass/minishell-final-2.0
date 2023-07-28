@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:37:50 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/26 20:04:53 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/28 19:43:49 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	find_end_pos(char **str, char type)
 			if (is_whitespace(**str) || is_operator(*str))
 				break;
 			else
-				while (*str && !is_whitespace(*str) && !is_operator(*str))
+				while (*str && !is_whitespace(**str) && !is_operator(*str))
 					(*str)++;
 			return ;
 		}
