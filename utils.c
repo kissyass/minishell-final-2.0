@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-int ft_strlen_double(char **str)
+/*int ft_strlen_double(char **str)
 {
     int i;
 
@@ -90,4 +90,4 @@ void ft_free_array_int(int **arr, int size)
     while (++i < size)
         free(arr[i]);
     free(arr);
-}
+}*/
