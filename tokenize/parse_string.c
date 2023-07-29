@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:37:50 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/28 19:43:49 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/29 17:48:47 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	without_quote_parse(char **str)
 	while (**str)
 	{
 		if (is_whitespace(**str))
-			break;
+			break ;
 		if (is_operator(*str))
-			break;
+			break ;
 		(*str)++;
 	}
 }
