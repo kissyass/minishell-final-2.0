@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:09:19 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/28 19:37:57 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/29 20:38:55 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	lexer(void)
 	t_token	*token;
 	t_process *process;
 
-	token =g_ms.token;
+	token = g_ms.token;
 	while (token)
 	{
 		if (token->type == PIPE || token->prev == NULL)
