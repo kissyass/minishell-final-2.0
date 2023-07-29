@@ -77,7 +77,7 @@ typedef struct s_minishell
     t_process   *process;
 }               t_minishell;
 
-t_minishell	g_ms;
+extern t_minishell	g_ms;
 
 
 /* typedef struct s_pipes
