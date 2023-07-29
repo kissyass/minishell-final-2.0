@@ -6,11 +6,13 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 19:16:54 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/28 20:05:54 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/29 19:05:45 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_minishell g_ms;
 
 void	init_app(char **env)
 {
@@ -32,24 +34,44 @@ void	init_shell(char *input)
 	start_cmd();
 }
 
+void	ctrl_c(int sig)
+{
+	(void)sig;
+	g_ms.ignore = TRUE;
+	ioctl(STDIN_FILENO, TIOCSTI, "\n");
+	write(1, "\033[A", 3);
+}
+
+void	ctrl_d(char *input)
+{
+	if (!input)
+	{
+		printf("exit\n");
+		exit(errno);
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	//t_minishell mini;#
 	char	*input;
 
-	(void)argc;
-	(void)argv;
+	//(void)argc;
+	//(void)argv;
     /*mini.env_size = ft_strlen_double(envp);
     mini.env = ft_set_env(envp, mini.env_size);*/
 	init_app(envp);
-	rl_bind_key('\t', rl_complete); // Enable tab-completion
+	//rl_bind_key('\t', rl_complete); // Enable tab-completion
 
 	while (argc && argv)
 	{
 		g_ms.ignore = FALSE;
+		signal(SIGINT, &ctrl_c);
+		signal(SIGQUIT, SIG_IGN);
 		write(1, "\033[32m", 5);
 		input = readline(">>> ");
 		write(1, "\033[0m", 4);
+		ctrl_d(input);
 		if (g_ms.ignore)
 		{
 			free(input);
