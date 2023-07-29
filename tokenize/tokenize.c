@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:38:26 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/26 20:05:20 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/29 20:18:48 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	tokenize(char *str)
 			PIPE), 1);
 		else if (is_operator(str) == HERE_DOC)
 			str += token_addback(&g_ms.token, init_token(ft_strdup("<"), \
-			RED_INPUT), 2);
+			RED_INPUT), 1);
 		else if (is_operator(str) == HERE_DOC)
 			str += token_addback(&g_ms.token, init_token(ft_strdup(">"), \
-			RED_OUTPUT), 2);
+			RED_OUTPUT), 1);
 		else
 			parse_token_string(&str);
 	}
