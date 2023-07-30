@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_env.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/30 20:02:13 by aeroglu           #+#    #+#             */
+/*   Updated: 2023/07/30 20:02:14 by aeroglu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 /*char **ft_set_env(char **envp, int size)
@@ -33,32 +45,32 @@ void	set_env(char **env)
 		g_ms.env[i] = ft_strdup(env[i]);
 }
 
-char    *split_env(char *str)
+char	*split_env(char *str)
 {
-    while (*str != '=')
-        str++;
-    str++;
-    return (ft_strdup(str));
+	while (*str != '=')
+		str++;
+	str++;
+	return (ft_strdup(str));
 }
 
-char    *get_env(char *str)
+char	*get_env(char *str)
 {
-    size_t  len;
-    char    **env;
-    char    *new_str;
+	size_t	len;
+	char	**env;
+	char	*new_str;
 
-    env = g_ms.env;
-    new_str = ft_strjoin(str, "=");
-    len = ft_strlen(new_str);
-    while (env && *env)
-    {
-        if (!ft_strncmp(*env, new_str, len))
-        {
-            free(new_str);
-            return (split_env(*env));
-        }
-        env++;
-    }
-    free(new_str);
-    return (ft_calloc(sizeof(char *), 1));
+	env = g_ms.env;
+	new_str = ft_strjoin(str, "=");
+	len = ft_strlen(new_str);
+	while (*env)
+	{
+		if (!ft_strncmp(*env, new_str, len))
+		{
+			free(new_str);
+			return (split_env(*env));
+		}
+		env++;
+	}
+	free(new_str);
+	return (ft_calloc(sizeof(char *), 1));
 }

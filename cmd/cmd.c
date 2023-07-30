@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 20:40:57 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/28 19:56:04 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/30 20:03:09 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	wait_cmd(void)
 	close_all_fd();
 	while (process)
 	{
-		if(process->pid != -1)
+		if (process->pid != -1)
 		{
 			waitpid(process->pid, &errno, 0);
 			errno = WEXITSTATUS(errno);

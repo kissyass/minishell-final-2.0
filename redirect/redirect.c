@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 20:33:28 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/28 19:39:26 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/30 19:55:35 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	get_all_inputs(t_process *process)
 
 void	set_all_outputs(t_process *process)
 {
-	int	i;
+	int		i;
 	char	**redirects;
 
 	i = 0;
@@ -48,8 +48,8 @@ void	set_all_outputs(t_process *process)
 
 void	fill_all_heredoc(void)
 {
-	int		i;
-	char	**redirects;
+	int			i;
+	char		**redirects;
 	t_process	*process;
 
 	process = g_ms.process;
@@ -61,7 +61,7 @@ void	fill_all_heredoc(void)
 		{
 			if (is_operator(redirects[i]) == HERE_DOC)
 				heredoc(process->heredoc_fd, redirects[i + 1]);
-			i+= 2;
+			i += 2;
 		}
 		process = process->next;
 	}

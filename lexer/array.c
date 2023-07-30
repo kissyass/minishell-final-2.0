@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 20:31:38 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/26 20:34:34 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/30 19:59:38 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	**push_array(char **arg_arr, char *str)
 {
-	int	i;
-	int	len;
-	char **new_arr;
+	int		i;
+	int		len;
+	char	**new_arr;
 
 	i = 0;
 	len = 0;

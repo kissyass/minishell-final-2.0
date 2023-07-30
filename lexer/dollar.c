@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:45:02 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/27 19:12:47 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/30 19:58:08 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_dollar(char *str)
 {
 	int	i;
 	int	single_quote;
-	int double_quote;
+	int	double_quote;
 
 	i = 0;
 	single_quote = TRUE;

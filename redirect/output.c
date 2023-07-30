@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 20:16:39 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/25 20:53:08 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/30 19:56:06 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	output(char *file, int mode)
 	{
 		perror("minishell");
 		if (is_parent())
-			return;
+			return ;
 		else
 			exit(errno);
 	}

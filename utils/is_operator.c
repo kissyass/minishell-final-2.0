@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 20:36:39 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/25 20:48:35 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/30 19:11:18 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_operator(char *str)
 {
-	if(!str)
+	if (!str)
 		return (0);
 	if (str[0] == '<' && str[1] == '<')
 		return (HERE_DOC);

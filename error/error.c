@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:12:59 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/28 19:36:08 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/30 20:00:11 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	command_err(char *str)
 	if (!is_parent())
 		exit(errno);
 }
-
 
 void	token_err(int type)
 {

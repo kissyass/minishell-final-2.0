@@ -6,11 +6,9 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:53:01 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/26 19:53:57 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/30 19:52:59 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../minishell.h"
 
 int	is_whitespace(char c)
 {
