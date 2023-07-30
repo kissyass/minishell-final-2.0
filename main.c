@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 19:16:54 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/29 19:05:45 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/07/30 19:13:51 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,16 @@ void	ctrl_d(char *input)
 
 int	main(int argc, char **argv, char **envp)
 {
-	//t_minishell mini;#
 	char	*input;
 
-	//(void)argc;
-	//(void)argv;
-    /*mini.env_size = ft_strlen_double(envp);
-    mini.env = ft_set_env(envp, mini.env_size);*/
 	init_app(envp);
-	//rl_bind_key('\t', rl_complete); // Enable tab-completion
-
 	while (argc && argv)
 	{
 		g_ms.ignore = FALSE;
 		signal(SIGINT, &ctrl_c);
 		signal(SIGQUIT, SIG_IGN);
 		write(1, "\033[32m", 5);
-		input = readline(">>> ");
+		input = readline("minishell_> ");
 		write(1, "\033[0m", 4);
 		ctrl_d(input);
 		if (g_ms.ignore)
@@ -83,8 +76,14 @@ int	main(int argc, char **argv, char **envp)
 			add_history(input);
 		}
 		free(input);
-		}
+	}
 	exit(errno);
+	//t_minishell mini;#
+	//(void)argc;
+	//(void)argv;
+    /*mini.env_size = ft_strlen_double(envp);
+    mini.env = ft_set_env(envp, mini.env_size);*/
+	//rl_bind_key('\t', rl_complete); // Enable tab-completion
 	/*while (1)
 	{
 		mini.input = readline(">>> "); // Read user input
@@ -99,5 +98,4 @@ int	main(int argc, char **argv, char **envp)
 		free(mini.input);
 	}
 	ft_free_array_char(mini.env, mini.env_size);*/
-	return 0;
 }
