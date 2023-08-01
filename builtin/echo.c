@@ -42,7 +42,7 @@ int	ft_quotes_index(t_builtin *built, int index, char quote)
 		ft_output(built, quote);
 	if (built->quote == 1 || built->dquote == 1)
 	{
-		printf("minishell: syntax error with open quotes\n");
+		printf("Minishell: syntax error with open quotes\n");
 		return (-1);
 	}
 	return (index);

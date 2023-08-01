@@ -14,18 +14,28 @@
 
 char **ft_set_env(char **envp, int size)
 {
+	printf("in ft set env\n");
     char **env;
     int i;
 
-    env = malloc(sizeof(char *) * (size + 1)); //
+    env = malloc(sizeof(char *) * (size + 1));
     if (!env)
         return (NULL);
     i = -1;
+	printf("1\n");
     while (envp[++i])
+	{
+		printf("i = %d\n", i);
+		printf("%s\n", envp[i]);
         env[i] = ft_strdup(envp[i]);
+	}
+	printf("2\n");
+	
     i--;
     while (++i < size)
         env[i] = NULL;
+	printf("3\n");
+	
     return(env);
 }
 
