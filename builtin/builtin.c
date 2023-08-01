@@ -31,11 +31,9 @@ int is_builtin(char *command)
     return (0);
 }
 
-void ft_builtin(/*t_minishell *mini*/)
+void ft_builtin(t_minishell *mini)
 {
-    /*mini->cmd = ft_split(mini->input, ' ');
-    printf("builtinf\n");
-    printf("%s, %d\n", mini->cmd[0], ft_cmdcmp(mini->cmd[0], "export"));
+    mini->cmd = ft_split(mini->input, ' ');
     if (mini->cmd[0] && ft_cmdcmp(mini->cmd[0], "echo"))
         ft_echo(mini);
     else if (ft_cmdcmp(mini->cmd[0], "cd"))
@@ -44,13 +42,13 @@ void ft_builtin(/*t_minishell *mini*/)
         ft_pwd(mini);
     else if (ft_cmdcmp(mini->cmd[0], "export"))
         ft_export(mini);
-    else if (ft_cmdcmp(mini->cmd[0], "unset"))
-        ft_unset(mini);
-    else if (ft_cmdcmp(mini->cmd[0], "env"))
-        ft_env(mini->env);
-    else if (ft_cmdcmp(mini->cmd[0], "exit"))
-        ft_exit(mini);
+    // else if (ft_cmdcmp(mini->cmd[0], "unset"))
+    //     ft_unset(mini);
+    // else if (ft_cmdcmp(mini->cmd[0], "env"))
+    //     ft_env(mini->env);
+    // else if (ft_cmdcmp(mini->cmd[0], "exit"))
+    //     ft_exit(mini);
     else
         ft_execute_cmds(mini->cmd, mini->env);
-    ft_free_array_char(mini->cmd, ft_count(mini->input, ' '));*/
+    ft_free_array_char(mini->cmd, ft_count(mini->input, ' '));
 }

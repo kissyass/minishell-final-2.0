@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-/*char **ft_set_env(char **envp, int size)
+char **ft_set_env(char **envp, int size)
 {
     char **env;
     int i;
@@ -27,7 +27,7 @@
     while (++i < size)
         env[i] = NULL;
     return(env);
-}*/
+}
 
 void	set_env(char **env)
 {

@@ -15,11 +15,7 @@
 void	ft_echo(t_minishell *mini)
 {
 	t_builtin	built;
-	int			i;
 
-	i = 0;
-	if (ft_cmdcmp(mini->cmd[1], "-n"))
-		i = 1;
 	built.input = malloc(sizeof(char));
 	built.output = malloc(sizeof(char));
 	if (!built.output || !built.input)

@@ -75,12 +75,17 @@ typedef struct s_minishell
     char        **paths;
     t_token     *token;
     t_process   *process;
+
+    //char **env;
+    //int env_size;
+    char *input;
+    char **cmd;
 }               t_minishell;
 
 extern t_minishell	g_ms;
 
 
-/* typedef struct s_pipes
+ typedef struct s_pipes
 {
     int cmd_num;
     pid_t *pid;
@@ -90,13 +95,13 @@ extern t_minishell	g_ms;
 
 }   t_pipes;
 
-typedef struct s_minishell
-{
-    char **env;
-    int env_size;
-    char *input;
-    char **cmd;
-} t_minishell;
+// typedef struct s_minishell
+// {
+//     char **env;
+//     int env_size;
+//     char *input;
+//     char **cmd;
+// } t_minishell;
 
 typedef struct s_builtin
 {
@@ -108,7 +113,7 @@ typedef struct s_builtin
     int end;
     char **env;
     int env_size;
-} t_builtin; */
+} t_builtin; 
 
 //tokenize
 void	tokenize(char *str);
@@ -150,7 +155,7 @@ void ft_free_array_char(char **arr, int size);
 void ft_free_array_int(int **arr, int size);
 int	is_whitespace(char c);
 int	contain_heredoc(t_process *process);
-int	ft_strcmp(const char *s1, const char *s2);
+int	ft_strcmp(char *s1, char *s2);
 
 //redirect
 void	input(char *file);
@@ -167,26 +172,26 @@ int	is_parent(void);
 
 //ENV
 //set_env
-//char **ft_set_env(char **envp, int size);
+char **ft_set_env(char **envp, int size);
 void	set_env(char **env);
 void	set_paths(void);
 char    *get_env(char *str);
 char	*get_path(char *cmd);
 
 //PIPES
-/*void ft_pipes(t_minishell *mini);
+void ft_pipes(t_minishell *mini);
 void ft_close(t_pipes *pipes, int i);
 void ft_dup2(t_pipes *pipes, t_minishell *mini, int i);
 void set_pipes(t_pipes *pipes, t_minishell *mini, int set);
-void ft_perror(char *error);*/
+void ft_perror(char *error);
 
 //BUILTIN
 //builtin
 void ft_builtin(t_minishell *mini);
 int is_builtin(char *command);
 //echo
-//void ft_echo(t_minishell *mini);
-/*int ft_check_quotes(t_builtin *built, int index, char quote);
+void ft_echo(t_minishell *mini);
+int ft_check_quotes(t_builtin *built, int index, char quote);
 void ft_quote(t_builtin *built, char quote, int type);
 int ft_space_check(int index, char *input);
 int ft_quotes_index(t_builtin *built, int index, char quote);
@@ -201,7 +206,11 @@ void ft_pwd(t_minishell *mini);
 //export
 void ft_export(t_minishell *mini);
 void ft_sort_export(t_builtin *built);
-void ft_swap(char **s1, char **s2);*/
+void ft_swap(char **s1, char **s2);
+int ft_add_export(t_builtin *built);
+int	ft_isalnum(int c);
+int ft_check_name(char *name);
+int ft_check_export(char c);
 
 //utils
 //int	ft_strcmp (char *s1, char *s2);

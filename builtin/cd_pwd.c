@@ -41,7 +41,7 @@ void ft_pwd(t_minishell *mini)
     if (!pwd)
         return ;
     getcwd(pwd, PATH_MAX);
-    printf("%s\n", pwd);
+    printf("%s\n%p\n", pwd, pwd);
     free(pwd);
     return ;
 }

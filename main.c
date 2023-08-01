@@ -53,38 +53,39 @@ void	ctrl_d(char *input)
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	*input;
+	// char	*input;
 
-	init_app(envp);
-	while (argc && argv)
-	{
-		g_ms.ignore = FALSE;
-		signal(SIGINT, &ctrl_c);
-		signal(SIGQUIT, SIG_IGN);
-		write(1, "\033[32m", 5);
-		input = readline("minishell_> ");
-		write(1, "\033[0m", 4);
-		ctrl_d(input);
-		if (g_ms.ignore)
-		{
-			free(input);
-			input = malloc(1);
-		}
-		if (*input)
-		{
-			init_shell(input);
-			add_history(input);
-		}
-		free(input);
-	}
-	exit(errno);
-	//t_minishell mini;#
-	//(void)argc;
-	//(void)argv;
-    /*mini.env_size = ft_strlen_double(envp);
-    mini.env = ft_set_env(envp, mini.env_size);*/
-	//rl_bind_key('\t', rl_complete); // Enable tab-completion
-	/*while (1)
+	// init_app(envp);
+	// while (argc && argv)
+	// {
+	// 	g_ms.ignore = FALSE;
+	// 	signal(SIGINT, &ctrl_c);
+	// 	signal(SIGQUIT, SIG_IGN);
+	// 	write(1, "\033[32m", 5);
+	// 	input = readline("minishell_> ");
+	// 	write(1, "\033[0m", 4);
+	// 	ctrl_d(input);
+	// 	if (g_ms.ignore)
+	// 	{
+	// 		free(input);
+	// 		input = malloc(1);
+	// 	}
+	// 	if (*input)
+	// 	{
+	// 		init_shell(input);
+	// 		add_history(input);
+	// 	}
+	// 	free(input);
+	// }
+	// exit(errno);
+	
+	t_minishell mini;
+	(void)argc;
+	(void)argv;
+    mini.env_size = ft_strlen_double(envp);
+    mini.env = ft_set_env(envp, mini.env_size);
+	rl_bind_key('\t', rl_complete); // Enable tab-completion
+	while (1)
 	{
 		mini.input = readline(">>> "); // Read user input
 		add_history(mini.input); // Add input to history
@@ -97,5 +98,5 @@ int	main(int argc, char **argv, char **envp)
 		}
 		free(mini.input);
 	}
-	ft_free_array_char(mini.env, mini.env_size);*/
+	ft_free_array_char(mini.env, mini.env_size);
 }

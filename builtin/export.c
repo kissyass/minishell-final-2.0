@@ -14,28 +14,94 @@
 
 void ft_export(t_minishell *mini)
 {
-    printf("inside export\n");
+    //printf("inside export\n");
     int i;
     t_builtin built;
 
     i = -1;
-    printf("before copy\n");
     built.env = malloc(sizeof(char *) * mini->env_size);
-    if (!built.env)
+    built.input = malloc(sizeof(char));
+    if (!built.env || !built.input)
         return ;
     built.env_size = mini->env_size;
     while (mini->env[++i])
         built.env[i] = ft_strdup(mini->env[i]);
-    printf("after copy\n");
     if (!mini->cmd[1])
     {
-        printf("before sort\n");
         ft_sort_export(&built);
-        printf("after sort\n");
         i = -1;
         while (built.env[++i])
             printf("declare -x %s\n", built.env[i]);
     }
+    else
+    {
+        built.input = ft_strdup2(mini->input, "export");
+        ft_add_export(&built);
+    }
+}
+
+int ft_add_export(t_builtin *built)
+{
+    int i;
+
+    i = -1;
+    built->output = malloc(sizeof(char));
+    if (!built->output)
+        return (0);
+    while (built->input[++i] && ft_check_export(built->input[i]) == 0)
+        built->output = ft_charcat(built->output, built->input[i]);
+    if (ft_check_export(built->input[i]) == 4)
+        return(printf("export: not valid in this context: %s\n", built->output));
+    else if (ft_check_export(built->input[i]) == 5)
+        return(printf("zsh: bad assignment\n"));
+    else if (ft_check_export(built->input[i]) == 1)
+    {
+        if (ft_check_name(built->output) != 1)
+            return (0);
+    }
+    return(printf("still in progress\n"));
+}
+
+int	ft_isalnum(int c)
+{
+	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')
+		|| (c >= 'a' && c <= 'z') || c == '_' || c == '"' || c == '\'' || c =='=')
+		return (1);
+	return (0);
+}
+
+int ft_check_name(char *name)
+{
+    int i;
+
+    i = 0;
+	while (name[++i])
+	{
+		if (!ft_isalnum(name[i]))
+            return(printf("Wrong name\n"));
+		if (i == 0)
+		{
+			if (name[i] >= '0' && name[i] <= '9')
+				return(printf("Wrong name\n"));
+		}
+	}
+	return (1);
+}
+
+int ft_check_export(char c)
+{
+    if (c == '=')
+        return (1);
+    else if (c == '\'')
+        return (2);
+    else if (c == '"')
+        return (3);
+    else if (c == ' ')
+        return (4);
+    else if (c == '\\')
+        return (5);
+    else
+        return(0);
 }
 
 void ft_sort_export(t_builtin *built)
@@ -53,9 +119,9 @@ void ft_sort_export(t_builtin *built)
         while (built->env[++j])
         {
             k = 1;
-            if (built->env[i][0] >= built->env[j][0])
+            if (built->env[i][0] > built->env[j][0])
                 ft_swap(&built->env[i], &built->env[j]);
-            else
+            else if (built->env[i][0] == built->env[j][0])
             {
                 while (built->env[i][k] == built->env[j][k])
                     k++;

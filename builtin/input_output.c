@@ -51,7 +51,7 @@ void	ft_output(t_builtin *built, char quote)
 	}
 }
 
-int	ft_check_input(t_builtin *built)
+int	 ft_check_input(t_builtin *built)
 {
 	int	i;
 
