@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 20:40:57 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/30 20:03:09 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/01 17:46:42 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	start_cmd(void)
 		return (close_all_fd());
 	if (is_builtin(process->execute[0]) && g_ms.process_count == 1)
 	{
-		//get_builtin(process);
+		get_builtin(process);
 		process = process->next;
 	}
 	while (process)
