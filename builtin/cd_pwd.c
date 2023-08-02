@@ -12,36 +12,36 @@
 
 #include "../minishell.h"
 
-void ft_cd(t_minishell *mini)
+void	ft_cd(void)
 {
-    if (!mini->cmd[1])
-        return ;
-    if (mini->cmd[1][0] != '.' && mini->cmd[1][0] != '~' /*&& mini->cmd[1][0] != '\\'*/)
-    {
-        if (chdir(mini->cmd[1]) != 0)
-        {
-            perror("cd");
-            return ;
-        }
-    }
-    else
-        printf("Specify absolute or relative path\n");
+	if (!g_ms.cmd[1])
+		return ;
+	if (g_ms.cmd[1][0] != '.' && g_ms.cmd[1][0] != '~')
+	{
+		if (chdir(g_ms.cmd[1]) != 0)
+		{
+			perror("cd");
+			return ;
+		}
+	}
+	else
+		printf("Specify absolute or relative path\n");
 }
 
-void ft_pwd(t_minishell *mini)
+void	ft_pwd(void)
 {
-    char *pwd;
+	char	*pwd;
 
-    if (mini->cmd[1])
-    {
-        printf("pwd:too many arguments\n");
-        return ;
-    }
-    pwd = malloc(sizeof(PATH_MAX));
-    if (!pwd)
-        return ;
-    getcwd(pwd, PATH_MAX);
-    printf("%s\n%p\n", pwd, pwd);
-    free(pwd);
-    return ;
+	if (g_ms.cmd[1])
+	{
+		printf("pwd:too many arguments\n");
+		return ;
+	}
+	pwd = malloc(sizeof(PATH_MAX));
+	if (!pwd)
+		return ;
+	getcwd(pwd, PATH_MAX);
+	printf("%s\n", pwd);
+	free(pwd);
+	return ;
 }

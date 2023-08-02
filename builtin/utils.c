@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykissiko <ykissiko@student.42istanbul.com  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/02 17:22:05 by ykissiko          #+#    #+#             */
+/*   Updated: 2023/08/02 17:22:07 by ykissiko         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-int	ft_strcmp (char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	size_t	i;
 
@@ -14,7 +26,7 @@ int	ft_strcmp (char *s1, char *s2)
 
 int	ft_cmdcmp(char *s1, char *s2)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (s1[i] != '\0' || s2[i] != '\0')
@@ -45,8 +57,8 @@ char	*ft_charcat(char *s, char c)
 	}
 	str[i] = c;
 	str[i + 1] = 0;
-    if (s)
-        free(s);
+	if (s)
+		free(s);
 	return (str);
 }
 

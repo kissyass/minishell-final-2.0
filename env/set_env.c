@@ -12,29 +12,29 @@
 
 #include "../minishell.h"
 
-char **ft_set_env(char **envp, int new_size, int old_size)
+char	**ft_set_env(char **envp, int new_size, int old_size)
 {
-    char **env;
-    int i;
+	char	**env;
+	int		i;
 
-    env = malloc(sizeof(char *) * (new_size));
-    if (!env)
-        return (NULL);
-    i = -1;
+	env = malloc(sizeof(char *) * (new_size));
+	if (!env)
+		return (NULL);
+	i = -1;
 	if (new_size > old_size)
 	{
 		while (++i < old_size)
-        	env[i] = ft_strdup(envp[i]);
+			env[i] = ft_strdup(envp[i]);
 		i--;
 		while (++i < new_size)
 			env[i] = NULL;
 	}
-    else
+	else
 	{
 		while (++i < new_size)
-        	env[i] = ft_strdup(envp[i]);
+			env[i] = ft_strdup(envp[i]);
 	}
-    return(env);
+	return (env);
 }
 
 void	set_env(char **env)

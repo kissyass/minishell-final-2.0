@@ -12,21 +12,21 @@
 
 #include "../minishell.h"
 
-void	get_builtin(t_process *process)
-{
-	int	in;
-	int	out;
+// void	get_builtin(t_process *process)
+// {
+// 	int	in;
+// 	int	out;
 
-	in = dup(0);
-	out = dup(1);
-	get_all_inputs(process);
-	set_all_outputs(process);
-	//ft_builtin()
-	dup2(in, 0);
-	dup2(out, 1);
-	close(in);
-	close(out);
-}
+// 	in = dup(0);
+// 	out = dup(1);
+// 	get_all_inputs(process);
+// 	set_all_outputs(process);
+// 	//ft_builtin()
+// 	dup2(in, 0);
+// 	dup2(out, 1);
+// 	close(in);
+// 	close(out);
+// }
 
 void	wait_cmd(void)
 {
@@ -57,7 +57,7 @@ void	start_cmd(void)
 		return (close_all_fd());
 	if (is_builtin(process->execute[0]) && g_ms.process_count == 1)
 	{
-		get_builtin(process);
+		ft_builtin();
 		process = process->next;
 	}
 	while (process)

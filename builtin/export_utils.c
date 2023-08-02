@@ -25,7 +25,7 @@ int	ft_export_check(t_builtin *built, int cmd)
 			built->var = ft_charcat(built->var, built->output[i]);
 		else
 			return (printf("export: '%s': not a valid identifier\n",
-							built->output));
+					built->output));
 	}
 	if (!ft_old_var(built, i, cmd) && cmd == 1)
 	{

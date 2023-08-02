@@ -1,0 +1,6 @@
+norminette minishell.h 
+minishell.h: Error!
+Error: PREPROC_CONSTANT     (line:  31, col:  20):	Preprocessor statement must only contain constant defines
+Error: PREPROC_CONSTANT     (line:  32, col:  23):	Preprocessor statement must only contain constant defines
+Error: PREPROC_CONSTANT     (line:  33, col:  23):	Preprocessor statement must only contain constant defines
+Notice: GLOBAL_VAR_DETECTED  (line:  93, col:   1):	Global variable present in file. Make sure it is a reasonable choice.

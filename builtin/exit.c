@@ -12,11 +12,11 @@
 
 #include "../minishell.h"
 
-void ft_exit(t_minishell *mini)
+void	ft_exit(void)
 {
-    ft_free_array_char(mini->env, mini->env_size);
-    ft_free_array_char(mini->cmd, ft_strlen_double(mini->cmd));
-    free(mini->input);
-    printf("exit\n");
+	ft_free_array_char(g_ms.env, g_ms.env_size);
+	ft_free_array_char(g_ms.cmd, ft_strlen_double(g_ms.cmd));
+	free(g_ms.input);
+	printf("exit\n");
 	exit(1);
 }

@@ -12,14 +12,14 @@
 
 #include "../minishell.h"
 
-void	ft_export(t_minishell *mini)
+void	ft_export(void)
 {
 	int			i;
 	t_builtin	built;
 
-	built.env_size = mini->env_size;
-	built.env = ft_set_env(mini->env, mini->env_size, mini->env_size);
-	if (!mini->cmd[1])
+	built.env_size = g_ms.env_size;
+	built.env = ft_set_env(g_ms.env, g_ms.env_size, g_ms.env_size);
+	if (!g_ms.cmd[1])
 	{
 		ft_sort_export(&built);
 		i = -1;
@@ -28,15 +28,14 @@ void	ft_export(t_minishell *mini)
 	}
 	else
 	{
-		built.input = ft_strdup2(mini->input, "export");
+		built.input = ft_strdup2(g_ms.input, "export");
 		ft_add_export(&built);
-		ft_free_array_char(mini->env, mini->env_size);
-		mini->env = ft_set_env(built.env, built.env_size, built.env_size);
-		mini->env_size = built.env_size;
+		ft_free_array_char(g_ms.env, g_ms.env_size);
+		g_ms.env = ft_set_env(built.env, built.env_size, built.env_size);
+		g_ms.env_size = built.env_size;
 	}
 	ft_free_array_char(built.env, built.env_size);
 }
-
 
 void	ft_sort_export(t_builtin *built)
 {

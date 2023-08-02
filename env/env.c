@@ -12,11 +12,11 @@
 
 #include "../minishell.h"
 
-void ft_env(t_minishell *mini)
+void	ft_env(void)
 {
-    int i;
+	int	i;
 
-    i = -1;
-    while (++i < mini->env_size)
-        printf("%s\n", mini->env[i]);
+	i = -1;
+	while (++i < g_ms.env_size)
+		printf("%s\n", g_ms.env[i]);
 }

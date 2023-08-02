@@ -97,7 +97,7 @@ int	ft_backslash(t_builtin *built, int i, char quote)
 
 int	ft_export_output(t_builtin *built, char *cmd)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (!built->input[0] || (built->input[0] >= '0' && built->input[0] <= '9'))

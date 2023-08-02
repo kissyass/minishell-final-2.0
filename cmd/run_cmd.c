@@ -57,7 +57,7 @@ void	run_cmd(t_process *process)
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
 		cmd_route(process);
-		//ft_builtin();
+		ft_builtin();
 		path = get_path(process->execute[0]);
 		execve(path, process->execute, g_ms.env);
 		command_err(process->execute[0]);

@@ -12,14 +12,15 @@
 
 #include "minishell.h"
 
-t_minishell g_ms;
+t_minishell	g_ms;
 
 void	init_app(char **env)
 {
 	errno = 0;
 	g_ms.paths = NULL;
 	g_ms.parent_pid = getpid();
-	set_env(env);
+	g_ms.env_size = ft_strlen_double(env);
+	g_ms.env = ft_set_env(env, g_ms.env_size, g_ms.env_size);
 	set_paths();
 }
 
@@ -53,50 +54,29 @@ void	ctrl_d(char *input)
 
 int	main(int argc, char **argv, char **envp)
 {
-	// char	*input;
-
-	// init_app(envp);
-	// while (argc && argv)
-	// {
-	// 	g_ms.ignore = FALSE;
-	// 	signal(SIGINT, &ctrl_c);
-	// 	signal(SIGQUIT, SIG_IGN);
-	// 	write(1, "\033[32m", 5);
-	// 	input = readline("minishell_> ");
-	// 	write(1, "\033[0m", 4);
-	// 	ctrl_d(input);
-	// 	if (g_ms.ignore)
-	// 	{
-	// 		free(input);
-	// 		input = malloc(1);
-	// 	}
-	// 	if (*input)
-	// 	{
-			// init_shell(input);
-	// 		add_history(input);
-	// 	}
-	// 	free(input);
-	// }
-	// exit(errno);
-	
-	t_minishell mini;
-	(void)argc;
-	(void)argv;
-    mini.env_size = ft_strlen_double(envp);
-    mini.env = ft_set_env(envp, mini.env_size, mini.env_size);
-	rl_bind_key('\t', rl_complete); // Enable tab-completion
-	while (1)
+	init_app(envp);
+	rl_bind_key('\t', rl_complete);
+	while (argc && argv)
 	{
-		mini.input = readline(">>> "); // Read user input
-		add_history(mini.input); // Add input to history
-		if (mini.input[0])
+		g_ms.ignore = FALSE;
+		signal(SIGINT, &ctrl_c);
+		signal(SIGQUIT, SIG_IGN);
+		write(1, "\033[32m", 5);
+		g_ms.input = readline("minishell_> ");
+		write(1, "\033[0m", 4);
+		ctrl_d(g_ms.input);
+		if (g_ms.ignore)
 		{
-			if (ft_strchr(mini.input, '|'))
-				ft_pipes(&mini);
-			else
-				ft_builtin(&mini);
+			free(g_ms.input);
+			g_ms.input = malloc(1);
 		}
-		free(mini.input);
+		if (g_ms.input[0])
+		{
+			init_shell(g_ms.input);
+			add_history(g_ms.input);
+		}
+		free(g_ms.input);
 	}
-	ft_free_array_char(mini.env, mini.env_size);
+	ft_free_array_char(g_ms.env, g_ms.env_size);
+	exit(errno);
 }

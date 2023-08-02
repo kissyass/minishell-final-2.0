@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	ft_echo(t_minishell *mini)
+void	ft_echo(void)
 {
 	t_builtin	built;
 
@@ -20,14 +20,14 @@ void	ft_echo(t_minishell *mini)
 	built.output = malloc(sizeof(char));
 	if (!built.output || !built.input)
 		return ;
-	built.input = ft_strdup2(mini->input, "echo -n");
+	built.input = ft_strdup2(g_ms.input, "echo -n");
 	if (!ft_check_input(&built))
 	{
 		free(built.input);
 		return ;
 	}
 	printf("%s", built.output);
-	if (!ft_cmdcmp(mini->cmd[1], "-n"))
+	if (!ft_cmdcmp(g_ms.cmd[1], "-n"))
 		printf("\n");
 	free(built.input);
 	free(built.output);
@@ -77,7 +77,7 @@ int	ft_check_quotes(t_builtin *built, int index, char quote)
 				+ 1) != ft_strlen(built->input))
 			index = ft_check_quotes(built, index + 1, quote);
 		else if (backslash > 0 && backslash % 2 == 1 && (index
-			    + 1) == ft_strlen(built->input))
+				+ 1) == ft_strlen(built->input))
 			ft_quote(built, quote, 1);
 	}
 	if (!built->input[index])
