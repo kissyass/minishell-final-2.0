@@ -17,7 +17,6 @@ void	ft_export(t_minishell *mini)
 	int			i;
 	t_builtin	built;
 
-	i = -1;
 	built.env_size = mini->env_size;
 	built.env = ft_set_env(mini->env, mini->env_size, mini->env_size);
 	if (!mini->cmd[1])
@@ -38,6 +37,7 @@ void	ft_export(t_minishell *mini)
 	ft_free_array_char(built.env, built.env_size);
 }
 
+
 void	ft_sort_export(t_builtin *built)
 {
 	int	i;
@@ -50,6 +50,8 @@ void	ft_sort_export(t_builtin *built)
 		j = i;
 		while (++j < built->env_size)
 		{
+			if (!built->env[j])
+				ft_swap(&built->env[j], &built->env[built->env_size - 1]);
 			k = 1;
 			if (built->env[i][0] > built->env[j][0])
 				ft_swap(&built->env[i], &built->env[j]);

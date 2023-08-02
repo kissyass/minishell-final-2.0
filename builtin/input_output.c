@@ -15,9 +15,9 @@
 int	ft_output_len(char *cmd, char *str)
 {
 	char	**cmds;
-	int	i;
-	int	j;
-	int	k;
+	int		i;
+	int		j;
+	int		k;
 
 	cmds = ft_split(cmd, ' ');
 	i = 0;
@@ -47,11 +47,11 @@ void	ft_output(t_builtin *built, char quote)
 		if (built->input[i] != '\\')
 			built->output = ft_charcat(built->output, built->input[i]);
 		else
-            i = ft_backslash(built, i, quote);
+			i = ft_backslash(built, i, quote);
 	}
 }
 
-int	 ft_check_input(t_builtin *built)
+int	ft_check_input(t_builtin *built)
 {
 	int	i;
 
@@ -74,34 +74,35 @@ int	 ft_check_input(t_builtin *built)
 	return (1);
 }
 
-int ft_backslash(t_builtin *built, int i, char quote)
+int	ft_backslash(t_builtin *built, int i, char quote)
 {
-    int backslash;
+	int	backslash;
 
-    backslash = 1;
-    while (++i < built->end && built->input[i] == '\\')
-        backslash++;
-    if (built->input[i] == quote && backslash % 2 == 1)
-        backslash--;
-    if (backslash == 0)
-        backslash = 0;
-    else if (backslash % 4 == 0)
-        backslash = backslash / 4;
-    else
-        backslash = backslash / 4 + 1;
-    while (--backslash >= 0)
-        built->output = ft_charcat(built->output, '\\');
-    i--;
-    return (i);
+	backslash = 1;
+	while (++i < built->end && built->input[i] == '\\')
+		backslash++;
+	if (built->input[i] == quote && backslash % 2 == 1)
+		backslash--;
+	if (backslash == 0)
+		backslash = 0;
+	else if (backslash % 4 == 0)
+		backslash = backslash / 4;
+	else
+		backslash = backslash / 4 + 1;
+	while (--backslash >= 0)
+		built->output = ft_charcat(built->output, '\\');
+	i--;
+	return (i);
 }
 
-int	ft_export_output(t_builtin *built)
+int	ft_export_output(t_builtin *built, char *cmd)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	if (!built->input[0] || (built->input[0] >= '0' && built->input[0] <= '9'))
-		return (printf("export: '%s': not a valid identifier\n", built->input));
+		return (printf("%s: '%s': not a valid identifier\n", cmd,
+				built->input));
 	while (built->input[++i])
 	{
 		if (built->input[i] == '"' || built->input[i] == '\'')

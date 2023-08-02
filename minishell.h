@@ -80,6 +80,8 @@ typedef struct s_minishell
     //int env_size;
     char *input;
     char **cmd;
+    char **envp;
+    int envp_size;
 }               t_minishell;
 
 extern t_minishell	g_ms;
@@ -205,7 +207,7 @@ int ft_output_len(char *cmd, char *str);
 int ft_check_input(t_builtin *built);
 void ft_output(t_builtin *built, char quote);
 int ft_backslash(t_builtin *built, int i, char quote);
-int	ft_export_output(t_builtin *built);
+int	ft_export_output(t_builtin *built, char *cmd);
 
 //cd_pwd
 void ft_cd(t_minishell *mini);
@@ -218,9 +220,13 @@ void ft_swap(char **s1, char **s2);
 
 //export_utils
 int ft_add_export(t_builtin *built);
-int	ft_old_var(t_builtin *built, int index);
+int	ft_old_var(t_builtin *built, int index, int cmd);
 void	ft_export_var(t_builtin *built, int i);
-int	ft_export_check(t_builtin *built);
+int	ft_export_check(t_builtin *built, int cmd);
+
+//unset
+void ft_unset(t_minishell *mini);
+void ft_unset_update(t_builtin *built, int index);
 
 //utils
 //int	ft_strcmp (char *s1, char *s2);

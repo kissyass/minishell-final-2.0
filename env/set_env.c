@@ -21,11 +21,19 @@ char **ft_set_env(char **envp, int new_size, int old_size)
     if (!env)
         return (NULL);
     i = -1;
-    while (++i < old_size)
-        env[i] = ft_strdup(envp[i]);
-    i--;
-    while (++i < new_size)
-        env[i] = NULL;
+	if (new_size > old_size)
+	{
+		while (++i < old_size)
+        	env[i] = ft_strdup(envp[i]);
+		i--;
+		while (++i < new_size)
+			env[i] = NULL;
+	}
+    else
+	{
+		while (++i < new_size)
+        	env[i] = ft_strdup(envp[i]);
+	}
     return(env);
 }
 

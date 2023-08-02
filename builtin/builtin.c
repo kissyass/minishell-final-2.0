@@ -42,8 +42,8 @@ void ft_builtin(t_minishell *mini)
         ft_pwd(mini);
     else if (ft_cmdcmp(mini->cmd[0], "export"))
         ft_export(mini);
-    // else if (ft_cmdcmp(mini->cmd[0], "unset"))
-    //     ft_unset(mini);
+    else if (ft_cmdcmp(mini->cmd[0], "unset"))
+        ft_unset(mini);
     // else if (ft_cmdcmp(mini->cmd[0], "env"))
     //     ft_env(mini->env);
     // else if (ft_cmdcmp(mini->cmd[0], "exit"))

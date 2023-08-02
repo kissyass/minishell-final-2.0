@@ -12,20 +12,22 @@
 
 #include "../minishell.h"
 
-int	ft_export_check(t_builtin *built)
+int	ft_export_check(t_builtin *built, int cmd)
 {
 	int	i;
 
 	i = -1;
-	while (built->output[++i] && built->output[i] != '=')
+	while (built->output[++i])
 	{
+		if (built->output[i] == '=' && cmd == 1)
+			break ;
 		if (ft_isalnum(built->output[i]))
 			built->var = ft_charcat(built->var, built->output[i]);
 		else
 			return (printf("export: '%s': not a valid identifier\n",
 							built->output));
 	}
-	if (!ft_old_var(built, i))
+	if (!ft_old_var(built, i, cmd) && cmd == 1)
 	{
 		ft_export_var(built, i);
 		built->env = ft_set_env(built->env, built->env_size + 1,
@@ -48,7 +50,7 @@ void	ft_export_var(t_builtin *built, int i)
 	}
 }
 
-int	ft_old_var(t_builtin *built, int index)
+int	ft_old_var(t_builtin *built, int index, int cmd)
 {
 	int		i;
 	char	**name;
@@ -60,8 +62,13 @@ int	ft_old_var(t_builtin *built, int index)
 		if (ft_cmdcmp(name[0], built->var))
 		{
 			ft_export_var(built, index);
-			free(built->env[i]);
-			built->env[i] = ft_strdup(built->var);
+			if (cmd == 1)
+			{
+				free(built->env[i]);
+				built->env[i] = ft_strdup(built->var);
+			}
+			if (cmd == 2)
+				ft_unset_update(built, i);
 			ft_free_array_char(name, ft_strlen_double(name));
 			return (1);
 		}
@@ -78,9 +85,9 @@ int	ft_add_export(t_builtin *built)
 	built->var = malloc(sizeof(char));
 	if (!built->output || !built->var)
 		return (0);
-	if (ft_export_output(built) != 0)
+	if (ft_export_output(built, "export") != 0)
 		return (0);
-	ft_export_check(built);
+	ft_export_check(built, 1);
 	free(built->output);
 	free(built->var);
 	free(built->input);
