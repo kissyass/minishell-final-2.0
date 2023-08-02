@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 	// 	}
 	// 	if (*input)
 	// 	{
-	// 		init_shell(input);
+			// init_shell(input);
 	// 		add_history(input);
 	// 	}
 	// 	free(input);
@@ -84,8 +84,6 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
     mini.env_size = ft_strlen_double(envp);
     mini.env = ft_set_env(envp, mini.env_size, mini.env_size);
-	mini.envp_size = ft_strlen_double(envp);
-    mini.envp = ft_set_env(envp, mini.envp_size, mini.envp_size);
 	rl_bind_key('\t', rl_complete); // Enable tab-completion
 	while (1)
 	{
