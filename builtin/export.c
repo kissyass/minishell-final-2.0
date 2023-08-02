@@ -18,9 +18,6 @@ void	ft_export(t_minishell *mini)
 	t_builtin	built;
 
 	i = -1;
-	built.input = malloc(sizeof(char));
-	if (!built.input)
-		return ;
 	built.env_size = mini->env_size;
 	built.env = ft_set_env(mini->env, mini->env_size, mini->env_size);
 	if (!mini->cmd[1])
@@ -34,10 +31,11 @@ void	ft_export(t_minishell *mini)
 	{
 		built.input = ft_strdup2(mini->input, "export");
 		ft_add_export(&built);
+        ft_free_array_char(mini->env, mini->env_size);
 		mini->env = ft_set_env(built.env, built.env_size, built.env_size);
 		mini->env_size = built.env_size;
-        printf("mini: %s, built: %s\n", mini->env[mini->env_size - 1], built.env[built.env_size]);
 	}
+    ft_free_array_char(built.env, built.env_size);
 }
 
 int	ft_export_output(t_builtin *built)
@@ -52,7 +50,7 @@ int	ft_export_output(t_builtin *built)
 		if (built->input[i] == '"' || built->input[i] == '\'')
 		{
 			i++;
-			built->end = ft_check_quotes(built, i, built->input[i]);
+			built->end = ft_check_quotes(built, i, built->input[i - 1]);
 			if (built->quote == 1 || built->dquote == 1)
 				return (printf("Minishell: syntax error with open quotes\n"));
 			i--;
@@ -70,88 +68,59 @@ int	ft_export_output(t_builtin *built)
 
 int	ft_export_check(t_builtin *built)
 {
-	char	*str;
-    char *more;
 	int		i;
 
-	str = malloc(sizeof(char) * 1);
-    more = malloc(sizeof(char) * 1);
-	if (!more || !str)
-		return (0);
 	i = -1;
-    str[0] = 0;
-    printf("var before start %s\n", str);
-    printf("more before start %s\n", more);
 	while (built->output[++i] && built->output[i] != '=')
 	{
 		if (ft_isalnum(built->output[i]))
-			str = ft_charcat(str, built->output[i]);
+			built->var = ft_charcat(built->var, built->output[i]);
 		else
 			return (printf("export: '%s': not a valid identifier\n",
 					built->output));
-        printf("var inside: %s and i %d\n", str, i);
 	}
-    printf("export check var %s\n", str);
-	if (!ft_old_var(built, str, i))
+	if (!ft_old_var(built, i))
 	{
-        printf("notold\n");
-        str = ft_export_var(built, str, i);
-        printf("is back\n");
-        printf("var not old: %s", str);
+        ft_export_var(built, i);
 		built->env = ft_set_env(built->env, built->env_size + 1,
 				built->env_size);
 		built->env_size++;
-		built->env[built->env_size - 1] = ft_strdup(str);
+		built->env[built->env_size - 1] = ft_strdup(built->var);
 	}
-    free(str);
-    free(more);
 	return (0);
 }
 
-char	*ft_export_var(t_builtin *built, char *var, int i)
+void	ft_export_var(t_builtin *built, int i)
 {
-    char *str;
-
-
-    str = ft_strdup(var);
-    printf("export var\n");
 	if (built->output[i])
 	{
-		str = ft_charcat(str, built->output[i]);
-		str = ft_charcat(str, '"');
+		built->var = ft_charcat(built->var, built->output[i]);
+		built->var = ft_charcat(built->var, '"');
 		while (built->output[++i])
-			str = ft_charcat(str, built->output[i]);
-		str = ft_charcat(str, '"');
+			built->var = ft_charcat(built->var, built->output[i]);
+		built->var = ft_charcat(built->var, '"');
 	}
-    printf("var %s\n", var);
-    printf("str %s\n", str);
-    free(var);
-	return (str);
 }
 
-int	ft_old_var(t_builtin *built, char *var, int index)
+int	ft_old_var(t_builtin *built, int index)
 {
 	int		i;
 	char	**name;
 
-    printf("old var\n");
 	i = -1;
 	while (++i < built->env_size)
 	{
 		name = ft_split(built->env[i], '=');
-		if (ft_cmdcmp(name[0], var))
+		if (ft_cmdcmp(name[0], built->var))
 		{
-            printf("var old: %s", var);
-			var = ft_export_var(built, var, index);
+			ft_export_var(built, index);
 			free(built->env[i]);
-			built->env[i] = ft_strdup(var);
-			//free(var);
+			built->env[i] = ft_strdup(built->var);
             ft_free_array_char(name, ft_strlen_double(name));
 			return (1);
 		}
         ft_free_array_char(name, ft_strlen_double(name));
 	}
-    printf("no match\n");
 	return (0);
 }
 
@@ -160,12 +129,15 @@ int	ft_add_export(t_builtin *built)
 	ft_quote(built, 0, 0);
 	built->end = 0;
 	built->output = malloc(sizeof(char));
-	if (!built->output)
+	built->var = malloc(sizeof(char));
+	if (!built->output || !built->var)
 		return (0);
 	if (ft_export_output(built) != 0)
 		return (0);
 	ft_export_check(built);
-    //printf("input %s, output %s\n", built->input, built->output);
+    free(built->output);
+    free(built->var);
+    free(built->input);
 	return (0);
 }
 
@@ -175,22 +147,6 @@ int	ft_isalnum(int c)
 			&& c <= 'z') || c == '_' || c == '"' || c == '\'' || c == '\\')
 		return (1);
 	return (0);
-}
-
-int	ft_check_export(char c)
-{
-	if (c == '=')
-		return (1);
-	else if (c == '\'')
-		return (2);
-	else if (c == '"')
-		return (3);
-	else if (c == ' ')
-		return (4);
-	else if (c == '\\')
-		return (5);
-	else
-		return (0);
 }
 
 void	ft_sort_export(t_builtin *built)

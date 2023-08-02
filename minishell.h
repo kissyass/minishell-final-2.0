@@ -188,32 +188,36 @@ void set_pipes(t_pipes *pipes, t_minishell *mini, int set);
 void ft_perror(char *error);
 
 //BUILTIN
+
 //builtin
 void ft_builtin(t_minishell *mini);
 int is_builtin(char *command);
+
 //echo
 void ft_echo(t_minishell *mini);
 int ft_check_quotes(t_builtin *built, int index, char quote);
 void ft_quote(t_builtin *built, char quote, int type);
 int ft_space_check(int index, char *input);
 int ft_quotes_index(t_builtin *built, int index, char quote);
+
 //input_output
 int ft_output_len(char *cmd, char *str);
 int ft_check_input(t_builtin *built);
 void ft_output(t_builtin *built, char quote);
 int ft_backslash(t_builtin *built, int i, char quote);
+
 //cd_pwd
 void ft_cd(t_minishell *mini);
 void ft_pwd(t_minishell *mini);
+
 //export
 void ft_export(t_minishell *mini);
 void ft_sort_export(t_builtin *built);
 void ft_swap(char **s1, char **s2);
 int ft_add_export(t_builtin *built);
 int	ft_isalnum(int c);
-int ft_check_export(char c);
-int	ft_old_var(t_builtin *built, char *var, int index);
-char	*ft_export_var(t_builtin *built, char *var, int i);
+int	ft_old_var(t_builtin *built, int index);
+void	ft_export_var(t_builtin *built, int i);
 int	ft_export_check(t_builtin *built);
 int	ft_export_output(t_builtin *built);
 
