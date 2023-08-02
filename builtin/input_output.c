@@ -94,3 +94,31 @@ int ft_backslash(t_builtin *built, int i, char quote)
     i--;
     return (i);
 }
+
+int	ft_export_output(t_builtin *built)
+{
+	int	i;
+
+	i = -1;
+	if (!built->input[0] || (built->input[0] >= '0' && built->input[0] <= '9'))
+		return (printf("export: '%s': not a valid identifier\n", built->input));
+	while (built->input[++i])
+	{
+		if (built->input[i] == '"' || built->input[i] == '\'')
+		{
+			i++;
+			built->end = ft_check_quotes(built, i, built->input[i - 1]);
+			if (built->quote == 1 || built->dquote == 1)
+				return (printf("Minishell: syntax error with open quotes\n"));
+			i--;
+			while (++i < built->end)
+				built->output = ft_charcat(built->output, built->input[i]);
+			i++;
+		}
+		if (!built->input[i] || built->input[i] == ' ')
+			break ;
+		else
+			built->output = ft_charcat(built->output, built->input[i]);
+	}
+	return (0);
+}

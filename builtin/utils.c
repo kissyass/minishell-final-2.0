@@ -68,3 +68,11 @@ char	*ft_strdup2(char *str, char *cmd)
 	s[++j] = 0;
 	return (s);
 }
+
+int	ft_isalnum(int c)
+{
+	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a'
+			&& c <= 'z') || c == '_' || c == '"' || c == '\'' || c == '\\')
+		return (1);
+	return (0);
+}
