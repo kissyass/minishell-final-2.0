@@ -82,8 +82,8 @@ int	main(int argc, char **argv, char **envp)
 	t_minishell mini;
 	(void)argc;
 	(void)argv;
-    g_ms.env_size = ft_strlen_double(envp);
-    mini.env = ft_set_env(envp, mini.env_size);
+    mini.env_size = ft_strlen_double(envp);
+    mini.env = ft_set_env(envp, mini.env_size, mini.env_size);
 	rl_bind_key('\t', rl_complete); // Enable tab-completion
 	while (1)
 	{

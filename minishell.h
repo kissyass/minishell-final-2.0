@@ -113,6 +113,7 @@ typedef struct s_builtin
     int end;
     char **env;
     int env_size;
+    char *var;
 } t_builtin; 
 
 //tokenize
@@ -172,7 +173,8 @@ int	is_parent(void);
 
 //ENV
 //set_env
-char **ft_set_env(char **envp, int size);
+// char **ft_set_env(char **envp, int size);
+char **ft_set_env(char **envp, int new_size, int old_size);
 void	set_env(char **env);
 void	set_paths(void);
 char    *get_env(char *str);
@@ -209,8 +211,11 @@ void ft_sort_export(t_builtin *built);
 void ft_swap(char **s1, char **s2);
 int ft_add_export(t_builtin *built);
 int	ft_isalnum(int c);
-int ft_check_name(char *name);
 int ft_check_export(char c);
+int	ft_old_var(t_builtin *built, char *var, int index);
+char	*ft_export_var(t_builtin *built, char *var, int i);
+int	ft_export_check(t_builtin *built);
+int	ft_export_output(t_builtin *built);
 
 //utils
 //int	ft_strcmp (char *s1, char *s2);
