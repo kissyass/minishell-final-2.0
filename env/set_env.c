@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 20:02:13 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/30 20:02:14 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/04 22:01:43 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char	**ft_set_env(char **envp, int new_size, int old_size)
 	char	**env;
 	int		i;
 
-	env = malloc(sizeof(char *) * (new_size));
+	env = malloc(sizeof(char *) * (new_size + 1));
+	ft_memset(env,0,sizeof(char *) * (new_size + 1));
 	if (!env)
 		return (NULL);
 	i = -1;
