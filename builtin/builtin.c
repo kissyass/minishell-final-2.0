@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:07:56 by ykissiko          #+#    #+#             */
-/*   Updated: 2023/08/02 17:17:18 by ykissiko         ###   ########.fr       */
+/*   Updated: 2023/08/04 21:40:17 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 int	is_builtin(char *command)
 {
 	if (ft_cmdcmp(command, "cd"))
-		return (1);
+		return (CD);
 	if (ft_cmdcmp(command, "env"))
-		return (1);
+		return (ENV);
 	if (ft_cmdcmp(command, "pwd"))
-		return (1);
+		return (PWD);
 	if (ft_cmdcmp(command, "echo"))
-		return (1);
+		return (ECHO);
 	if (ft_cmdcmp(command, "exit"))
-		return (1);
+		return (EXIT);
 	if (ft_cmdcmp(command, "unset"))
-		return (1);
+		return (UNSET);
 	if (ft_cmdcmp(command, "export"))
-		return (1);
+		return (EXPORT);
 	return (0);
 }
 
-void	ft_builtin(void)
+void	ft_builtin()
 {
 	g_ms.cmd = ft_split(g_ms.input, ' ');
 	if (g_ms.cmd[0] && ft_cmdcmp(g_ms.cmd[0], "echo"))
