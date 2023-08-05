@@ -17,8 +17,8 @@ void	ft_export(void)
 	int			i;
 	t_builtin	built;
 
-	built.env_size = g_ms.env_size;
-	built.env = ft_set_env(g_ms.env, g_ms.env_size, g_ms.env_size);
+	built.env_size = g_ms.exp_size;
+	built.env = ft_set_env(g_ms.exp, g_ms.exp_size, g_ms.exp_size);
 	if (!g_ms.cmd[1])
 	{
 		ft_sort_export(&built);
@@ -30,9 +30,9 @@ void	ft_export(void)
 	{
 		built.input = ft_strdup2(g_ms.input, "export");
 		ft_add_export(&built);
-		ft_free_array_char(g_ms.env, g_ms.env_size);
-		g_ms.env = ft_set_env(built.env, built.env_size, built.env_size);
-		g_ms.env_size = built.env_size;
+		ft_free_array_char(g_ms.exp, g_ms.exp_size);
+		g_ms.exp = ft_set_env(built.env, built.env_size, built.env_size);
+		g_ms.exp_size = built.env_size;
 	}
 	ft_free_array_char(built.env, built.env_size);
 }

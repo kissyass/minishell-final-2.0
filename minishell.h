@@ -183,6 +183,7 @@ char					*get_env(char *str);
 char					*get_path(char *cmd);
 //env
 void					ft_env(void);
+void ft_env_add(t_builtin *built);
 
 //PIPES
 void					ft_pipes(t_minishell *mini);
@@ -219,7 +220,7 @@ void					ft_swap(char **s1, char **s2);
 //export_utils
 int						ft_add_export(t_builtin *built);
 int						ft_old_var(t_builtin *built, int index, int cmd);
-void					ft_export_var(t_builtin *built, int i);
+void					ft_export_var(t_builtin *built, int i, int cmd);
 int						ft_export_check(t_builtin *built, int cmd);
 //unset
 void					ft_unset(void);
