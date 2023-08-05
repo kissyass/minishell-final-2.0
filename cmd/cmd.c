@@ -31,6 +31,7 @@
 void	wait_cmd(void)
 {
 	t_process	*process;
+	int			status;
 
 	process = g_ms.process;
 	close_all_fd();
@@ -38,8 +39,8 @@ void	wait_cmd(void)
 	{
 		if (process->pid != -1)
 		{
-			waitpid(process->pid, &errno, 0);
-			errno = WEXITSTATUS(errno);
+			waitpid(process->pid, &status, 0);
+			g_ms.status = WEXITSTATUS(status);
 		}
 		process = process->next;
 	}
@@ -57,13 +58,11 @@ void	start_cmd(void)
 		return (close_all_fd());
 	if (is_builtin(process->execute[0]) && g_ms.process_count == 1)
 	{
-		//printf("builtin true\n");
 		get_builtin(process);
 		process = process->next;
 	}
 	while (process)
 	{
-		//printf("builtin false\n");
 		run_cmd(process);
 		process = process->next;
 	}
