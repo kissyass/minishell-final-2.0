@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:45:02 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/30 19:58:08 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/05 16:19:15 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_dollar(char *str)
 			double_quote = !double_quote;
 		i++;
 	}
-	if (valid_op(*(ft_strchr(str, DOLLAR_OP) + 1)))
+	if (!valid_op(*(ft_strchr(str, DOLLAR_OP) + 1)))
 		return (FALSE);
 	return (single_quote);
 }
