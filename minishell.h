@@ -225,6 +225,7 @@ int						ft_export_check(t_builtin *built, int cmd);
 //unset
 void					ft_unset(void);
 void					ft_unset_update(t_builtin *built, int index);
+void ft_unset_env(t_builtin *built);
 //exit
 void					ft_exit(void);
 //utils

@@ -20,9 +20,9 @@ void	init_app(char **env)
 	g_ms.paths = NULL;
 	g_ms.parent_pid = getpid();
 	g_ms.env_size = ft_strlen_double(env);
-	g_ms.env = ft_set_env(env, g_ms.env_size, g_ms.env_size);
+	g_ms.env = ft_set_env(env, g_ms.env_size + 1, g_ms.env_size);
 	g_ms.exp_size = ft_strlen_double(env);
-	g_ms.exp = ft_set_env(env, g_ms.env_size, g_ms.env_size);
+	g_ms.exp = ft_set_env(env, g_ms.env_size + 1, g_ms.env_size);
 	//printf("sizes env %d, exp %d\n", g_ms.env_size, g_ms.exp_size);
 	set_paths();
 }
