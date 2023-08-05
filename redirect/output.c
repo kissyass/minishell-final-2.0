@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 20:16:39 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/30 19:56:06 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/05 23:42:05 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	output(char *file, int mode)
 {
-	int	fd;
+	int		fd;
 
 	fd = 0;
 	if (mode == REPLACE)
@@ -27,7 +27,7 @@ void	output(char *file, int mode)
 		if (is_parent())
 			return ;
 		else
-			exit(errno);
+			exit(g_ms.exit_code);
 	}
 	dup2(fd, 1);
 	close(fd);

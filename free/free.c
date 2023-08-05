@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:32:15 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/30 19:59:49 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/05 23:43:44 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,28 @@ void	free_array(char **arr)
 	free(arr);
 }
 
+void	free_process(void)
+{
+	t_process	*tmp;
+	t_process	*process;
+
+	process = g_ms.process;
+	if (!process)
+		return ;
+	while (process)
+	{
+		free_array(process->execute);
+		free_array(process->redirects);
+		tmp = process;
+		process = process->next;
+		free(tmp);
+	}
+}
+
 void	free_token(void)
 {
-	t_token	*tmp;
-	t_token	*token;
+	t_token		*tmp;
+	t_token		*token;
 
 	token = g_ms.token;
 	while (token)

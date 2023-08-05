@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:45:02 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/08/05 16:19:15 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/05 23:43:01 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	valid_op(char c)
 
 int	check_dollar(char *str)
 {
-	int	i;
-	int	single_quote;
-	int	double_quote;
+	int		i;
+	int		single_quote;
+	int		double_quote;
 
 	i = 0;
 	single_quote = TRUE;
@@ -42,7 +42,7 @@ int	check_dollar(char *str)
 	return (single_quote);
 }
 
-static char	*get_str(char *str, int *pos, int type)
+static char	*get_str(char *str, int	*pos, int type)
 {
 	int		first;
 	char	*data;
@@ -69,11 +69,11 @@ char	*parse_dollar_op(char *str)
 	push_new_str(&result, data);
 	first = i;
 	if (str[i] == '?' && ++i)
-		push_new_str(&result, ft_itoa(errno));
+		push_new_str(&result, ft_itoa(g_ms.exit_code));
 	else
 	{
 		while (valid_op(str[i]))
-			i++;
+			(i)++;
 		data = ft_substr(str, first, i - first);
 		env = get_env(data);
 		push_new_str(&result, env);

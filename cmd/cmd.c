@@ -6,27 +6,27 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 20:40:57 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/08/04 22:02:52 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/05 23:45:43 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
- void	get_builtin(t_process *process)
- {
- 	int	in;
- 	int	out;
+void	get_builtin(t_process *process)
+{
+	int	in;
+	int	out;
 
- 	in = dup(0);
- 	out = dup(1);
- 	get_all_inputs(process);
- 	set_all_outputs(process);
- 	ft_builtin();
- 	dup2(in, 0);
- 	dup2(out, 1);
- 	close(in);
- 	close(out);
- }
+	in = dup(0);
+	out = dup(1);
+	get_all_inputs(process);
+	set_all_outputs(process);
+	ft_builtin(process->execute);
+	dup2(in, 0);
+	dup2(out, 1);
+	close(in);
+	close(out);
+}
 
 void	wait_cmd(void)
 {
@@ -41,6 +41,7 @@ void	wait_cmd(void)
 		{
 			waitpid(process->pid, &status, 0);
 			g_ms.status = WEXITSTATUS(status);
+			g_ms.exit_code = g_ms.status;
 		}
 		process = process->next;
 	}

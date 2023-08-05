@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 19:40:26 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/28 19:40:50 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/06 00:42:08 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ void	close_heredoc(int sig)
 {
 	(void)sig;
 	g_ms.ignore = TRUE;
+	g_ms.exit_code = 1;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 }
 
 void	heredoc(int *fd, char *endline)
 {
-	char		*input;
+	//char		*input;
 	static int	start = 0;
 
 	if (start)
@@ -35,15 +36,17 @@ void	heredoc(int *fd, char *endline)
 	while (1)
 	{
 		signal(SIGINT, &close_heredoc);
-		input = readline("heredoc>> ");
-		if (!input || ft_strcmp(input, endline) || g_ms.ignore)
+		g_ms.input = readline("heredoc>> ");
+		printf ("%s\n", endline);
+		printf ("%s\n", g_ms.input);
+		if (!g_ms.input || ft_strcmp(g_ms.input, endline) || g_ms.ignore)
 		{
-			free(input);
+			free(g_ms.input);
 			break ;
 		}
-		write(fd[1], input, ft_strlen(input));
+		write(fd[1], g_ms.input, ft_strlen(g_ms.input));
 		write(fd[1], "\n", 1);
-		free(input);
+		free(g_ms.input);
 	}
 	close(fd[1]);
 }

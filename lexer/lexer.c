@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:09:19 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/30 19:59:15 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/05 23:43:11 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	append_arguments(t_token **token, t_process *process)
 {
-	char	*data;
+	char		*data;
 
 	if ((*token)->type == STRING)
 	{

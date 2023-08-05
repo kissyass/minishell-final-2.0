@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:11:51 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/27 18:19:09 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/05 23:43:20 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_process	*init_process(void)
 
 	process = ft_calloc(sizeof(t_process), 1);
 	pipe(process->fd);
-	process->pid = 1;
+	process->pid = -1;
 	process->execute = ft_calloc(sizeof(char *), 1);
 	process->redirects = ft_calloc(sizeof(char *), 1);
 	process->prev = NULL;

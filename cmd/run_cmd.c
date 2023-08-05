@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 16:40:09 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/30 20:02:43 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/05 23:45:37 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void	run_cmd(t_process *process)
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
 		cmd_route(process);
-		ft_builtin();
+		ft_builtin(process->execute);
 		path = get_path(process->execute[0]);
 		execve(path, process->execute, g_ms.env);
 		command_err(process->execute[0]);
-		exit(errno);
+		exit(g_ms.exit_code);
 	}
 	else
 		process->pid = pid;

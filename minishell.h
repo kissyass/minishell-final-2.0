@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykissiko <ykissiko@student.42istanbul.com  +#+  +:+       +#+        */
+/*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:31:15 by ykissiko          #+#    #+#             */
-/*   Updated: 2023/08/02 17:31:17 by ykissiko         ###   ########.fr       */
+/*   Updated: 2023/08/05 23:50:11 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+# define SPACE 32
+# define TAB '\t'
 # define TRUE 1
 # define FALSE 0
 # define DOLLAR_OP '$'
@@ -80,6 +82,7 @@ typedef struct s_minishell
 {
 	int					parent_pid;
 	int					process_count;
+	int					exit_code;
 	int					ignore;
 	int					env_size;
 	char				**env;
@@ -151,6 +154,7 @@ t_token					*init_token(char *str, enum e_ttype type);
 // free
 void					free_array(char **arr);
 void					free_token(void);
+void	free_process(void);
 
 //UTILS
 int						ft_strlen_double(char **str);
@@ -195,7 +199,7 @@ void					ft_perror(char *error);
 
 //BUILTIN
 //builtin
-void					ft_builtin(void);
+void					ft_builtin(char **execute);
 int						is_builtin(char *command);
 //echo
 void					ft_echo(void);
@@ -231,12 +235,21 @@ void					ft_unset(void);
 void					ft_unset_update(t_builtin *built, int index);
 void ft_unset_env(t_builtin *built);
 //exit
-void					ft_exit(void);
+void					ft_exit(char **input);
 //utils
 int						ft_strcmp(char *s1, char *s2);
 int						ft_cmdcmp(char *s1, char *s2);
 char					*ft_charcat(char *s, char c);
 char					*ft_strdup2(char *str, char *cmd);
 int						ft_isalnum(int c);
+
+//tools
+void	ctrl_bs(int sig);
+void	ctrl_d(char *input);
+void	ctrl_c(int sig);
+void	init_shell(char *input);
+
+//pipecheck
+int	ft_pipecheck(char *str);
 
 #endif

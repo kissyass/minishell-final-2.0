@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:12:59 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/07/30 20:00:11 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/05 23:43:58 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	command_err(char *str)
 {
-	errno = 127;
+	g_ms.exit_code = 127;
 	write(2, "minishell: ", 11);
 	write(2, str, ft_strlen(str));
 	write(2, ": command not found\n", 20);
 	if (!is_parent())
-		exit(errno);
+		exit(g_ms.exit_code);
 }
 
 void	token_err(int type)
@@ -38,7 +38,7 @@ void	token_err(int type)
 		red = "|";
 	else
 		red = "newline";
-	errno = 258;
+	g_ms.exit_code = 258;
 	write(2, "minishell: syntax error near unexpected token '", 47);
 	write(2, red, ft_strlen(red));
 	write(2, "'\n", 2);
@@ -46,23 +46,27 @@ void	token_err(int type)
 
 void	directory_err(char *str)
 {
-	errno = 126;
+	g_ms.exit_code = 126;
 	write(2, "minishell: ", 11);
 	write(2, str, ft_strlen(str));
 	write(2, ": is a directory\n", 17);
 	if (!is_parent())
-		exit(errno);
+		exit(g_ms.exit_code);
 }
 
 void	no_file_err(char *str)
 {
 	if (ft_strchr(str, '/'))
-		errno = 127;
+	{
+		g_ms.exit_code = 127;
+	}
 	else
-		errno = 1;
+	{
+		g_ms.exit_code = 1;
+	}
 	write(2, "minishell: ", 11);
 	write(2, str, ft_strlen(str));
 	write(2, ": No such file or directory\n", 28);
 	if (!is_parent())
-		exit(errno);
+		exit(g_ms.exit_code);
 }

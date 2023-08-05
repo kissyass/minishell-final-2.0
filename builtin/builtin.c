@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:07:56 by ykissiko          #+#    #+#             */
-/*   Updated: 2023/08/04 21:40:17 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/05 23:55:39 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,30 @@ int	is_builtin(char *command)
 	return (0);
 }
 
-void	ft_builtin()
+/*void	ft_builtin(char **execute)
+{
+	int	type;
+
+	type = is_builtin(execute[0]);
+	if (type != 0)
+		g_ms.exit_code = 0;
+	if (type == CD)
+		ft_cd();
+	if (type == ENV)
+		ft_env();
+	if (type == PWD)
+		ft_pwd();
+	if (type == ECHO)
+		ft_echo();
+	if (type == EXIT)
+		ft_exit(execute);
+	if (type == UNSET)
+		ft_unset();
+	if (type == EXPORT)
+		ft_export();
+}*/
+
+void	ft_builtin(char **execute)
 {
 	g_ms.cmd = ft_split(g_ms.input, ' ');
 	if (g_ms.cmd[0] && ft_cmdcmp(g_ms.cmd[0], "echo"))
@@ -47,6 +70,6 @@ void	ft_builtin()
 	else if (ft_cmdcmp(g_ms.cmd[0], "env"))
 		ft_env();
 	else if (ft_cmdcmp(g_ms.cmd[0], "exit"))
-		ft_exit();
+		ft_exit(execute);
 	ft_free_array_char(g_ms.cmd, ft_count(g_ms.input, ' '));
 }
