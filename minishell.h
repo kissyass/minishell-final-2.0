@@ -90,6 +90,7 @@ typedef struct s_minishell
 	t_process			*process;
 	char				*input;
 	char				**cmd;
+	int status;
 }						t_minishell;
 
 extern t_minishell		g_ms;
@@ -204,6 +205,9 @@ void					ft_quote(t_builtin *built, char quote, int type);
 int						ft_space_check(int index, char *input);
 int						ft_quotes_index(t_builtin *built, int index,
 							char quote);
+int	skip_flag(char **str);
+char *echo_cmd(int index);
+int ft_dollar_echo(int index, t_builtin *built);
 //input_output
 int						ft_output_len(char *cmd, char *str);
 int						ft_check_input(t_builtin *built);
