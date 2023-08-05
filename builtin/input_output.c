@@ -44,7 +44,9 @@ void	ft_output(t_builtin *built, char quote)
 	i = built->start - 1;
 	while (++i < built->end)
 	{
-		if (built->input[i] != '\\')
+		if (built->input[i] == '$')
+			i = ft_dollar_echo(i, built) - 1;
+		else if (built->input[i] != '\\')
 			built->output = ft_charcat(built->output, built->input[i]);
 		else
 			i = ft_backslash(built, i, quote);
@@ -66,7 +68,10 @@ int	ft_check_input(t_builtin *built)
 		else
 		{
 			i = ft_space_check(i, built->input);
-			built->output = ft_charcat(built->output, built->input[i]);
+			if (built->input[i] == '$')
+				i = ft_dollar_echo(i, built) - 1;
+			else
+				built->output = ft_charcat(built->output, built->input[i]);
 		}
 		if (i == -1)
 			return (0);
