@@ -24,7 +24,7 @@ void	ft_echo(void)
 	{
 		if ((ft_cmdcmp(g_ms.cmd[1], "-n") && g_ms.cmd[2]) || !ft_cmdcmp(g_ms.cmd[1], "-n"))
 		{
-			built.input = ft_strdup2(g_ms.input, "echo -n");
+			built.input = ft_strdup2(g_ms.input, echo_cmd(skip_flag(g_ms.process->execute)));
 			if (!ft_check_input(&built))
 			{
 				free(built.input);
@@ -39,6 +39,80 @@ void	ft_echo(void)
 	free(built.output);
 }
 
+int ft_dollar_echo(int index, t_builtin *built)
+{
+	char *var;
+	char **name;
+	int j;
+
+	var = ft_calloc(sizeof(char), 1);
+	if (built->input[index + 1] == '?')
+	{
+		built->output = ft_strcat(built->output, ft_itoa(g_ms.status));
+		index += 2;
+	}
+	else
+	{
+		while (built->input[++index] && built->input[index] != ' ' && ft_isalnum(built->input[index]) && built->input[index] != '"' && built->input[index] != '\\' && built->input[index] != '\'')
+			var = ft_charcat(var, built->input[index]);
+		int i = -1;
+		while (g_ms.env[++i])
+		{
+			name = ft_split(g_ms.env[i], '=');
+			if (ft_cmdcmp(name[0], var))
+			{
+				j = 0;
+				while (name[++j])
+					built->output = ft_strcat(built->output, name[j]);
+				break ;
+			}
+			ft_free_array_char(name, ft_count(g_ms.env[i], '='));
+		}
+	}
+	return (index);
+}
+
+char *echo_cmd(int index)
+{
+	char *str;
+	int i;
+
+	str = ft_calloc(sizeof(char), 1);
+	i = -1;
+	while (++i < index)
+	{
+		str = ft_strcat(str, g_ms.process->execute[i]);
+		str = ft_charcat(str, ' ');
+	}
+	return (str);
+}
+
+int	skip_flag(char **str)
+{
+	int	i;
+	int	j;
+	i = 1;
+	while (str[i])
+	{
+		if (str[i][0] == '-' && str[i][0])
+		{
+			j = 1;
+			while (str[i][j] == 'n' && str[i][j])
+				j++;
+			if (str[i][j] == '\0')
+			{
+				if (j > 1 && str[i][j - 1] == 'n')
+					i++;
+			}
+			else
+				return (i);
+		}
+		else
+			return (i);
+	}
+	return (i);
+}
+
 int	ft_quotes_index(t_builtin *built, int index, char quote)
 {
 	built->start = index + 1;
@@ -46,7 +120,7 @@ int	ft_quotes_index(t_builtin *built, int index, char quote)
 	built->end = index;
 	if (built->dquote == 0 && built->quote == 0)
 		ft_output(built, quote);
-	if (built->quote == 1 || built->dquote == 1)
+	else if (built->quote == 1 || built->dquote == 1)
 	{
 		printf("Minishell: syntax error with open quotes\n");
 		return (-1);
