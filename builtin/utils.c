@@ -46,7 +46,7 @@ char	*ft_charcat(char *s, char c)
 	i = 0;
 	if (s)
 		i = ft_strlen(s);
-	str = malloc(sizeof(char) * (i + 2));
+	str = ft_calloc(sizeof(char), (i + 2));
 	if (!str)
 		return (NULL);
 	if (s)
@@ -70,7 +70,7 @@ char	*ft_strdup2(char *str, char *cmd)
 
 	i = ft_output_len(cmd, str);
 	j = ft_strlen(str);
-	s = malloc(sizeof(char) * (j + 1));
+	s = ft_calloc(sizeof(char), (j + 1));
 	if (!s)
 		return (NULL);
 	i--;

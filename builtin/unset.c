@@ -21,8 +21,8 @@ void	ft_unset(void)
 	if (g_ms.cmd[1])
 	{
 		built.input = ft_strdup2(g_ms.input, "unset");
-		built.output = malloc(sizeof(char));
-		built.var = malloc(sizeof(char));
+		built.output = ft_calloc(sizeof(char), 1);
+		built.var = ft_calloc(sizeof(char), 1);
 		if (!built.output || !built.var)
 			return ;
 		if (ft_export_output(&built, "export") != 0)

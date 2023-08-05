@@ -37,7 +37,7 @@ void	ft_pwd(void)
 		printf("pwd:too many arguments\n");
 		return ;
 	}
-	pwd = malloc(sizeof(PATH_MAX));
+	pwd = ft_calloc(sizeof(PATH_MAX), 1);
 	if (!pwd)
 		return ;
 	getcwd(pwd, PATH_MAX);

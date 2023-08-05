@@ -16,18 +16,24 @@ void	ft_echo(void)
 {
 	t_builtin	built;
 
-	built.input = malloc(sizeof(char));
-	built.output = malloc(sizeof(char));
+	built.input = ft_calloc(sizeof(char), 1);
+	built.output = ft_calloc(sizeof(char), 1);
 	if (!built.output || !built.input)
 		return ;
-	built.input = ft_strdup2(g_ms.input, "echo -n");
-	if (!ft_check_input(&built))
+	if ((g_ms.cmd[1]))
 	{
-		free(built.input);
-		return ;
+		if ((ft_cmdcmp(g_ms.cmd[1], "-n") && g_ms.cmd[2]) || !ft_cmdcmp(g_ms.cmd[1], "-n"))
+		{
+			built.input = ft_strdup2(g_ms.input, "echo -n");
+			if (!ft_check_input(&built))
+			{
+				free(built.input);
+				return ;
+			}
+			printf("%s", built.output);
+		}
 	}
-	printf("%s", built.output);
-	if (!ft_cmdcmp(g_ms.cmd[1], "-n"))
+	if (g_ms.cmd[1] && !ft_cmdcmp(g_ms.cmd[1], "-n"))
 		printf("\n");
 	free(built.input);
 	free(built.output);

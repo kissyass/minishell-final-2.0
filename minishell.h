@@ -83,6 +83,8 @@ typedef struct s_minishell
 	int					ignore;
 	int					env_size;
 	char				**env;
+	int					exp_size;
+	char				**exp;
 	char				**paths;
 	t_token				*token;
 	t_process			*process;

@@ -57,13 +57,13 @@ void	start_cmd(void)
 		return (close_all_fd());
 	if (is_builtin(process->execute[0]) && g_ms.process_count == 1)
 	{
-		printf("builtin true\n");
+		//printf("builtin true\n");
 		get_builtin(process);
 		process = process->next;
 	}
 	while (process)
 	{
-		printf("builtin false\n");
+		//printf("builtin false\n");
 		run_cmd(process);
 		process = process->next;
 	}

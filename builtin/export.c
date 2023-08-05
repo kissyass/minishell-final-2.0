@@ -69,7 +69,7 @@ void	ft_swap(char **s1, char **s2)
 {
 	char	**temp;
 
-	temp = malloc(sizeof(char *) * (ft_strlen(*s1) + 1));
+	temp = ft_calloc(sizeof(char *), (ft_strlen(*s1) + 1));
 	if (!temp)
 		return ;
 	*temp = *s1;

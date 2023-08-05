@@ -81,8 +81,8 @@ int	ft_add_export(t_builtin *built)
 {
 	ft_quote(built, 0, 0);
 	built->end = 0;
-	built->output = malloc(sizeof(char));
-	built->var = malloc(sizeof(char));
+	built->output = ft_calloc(sizeof(char), 1);
+	built->var = ft_calloc(sizeof(char), 1);
 	if (!built->output || !built->var)
 		return (0);
 	if (ft_export_output(built, "export") != 0)

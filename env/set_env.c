@@ -17,8 +17,9 @@ char	**ft_set_env(char **envp, int new_size, int old_size)
 	char	**env;
 	int		i;
 
-	env = malloc(sizeof(char *) * (new_size + 1));
-	ft_memset(env,0,sizeof(char *) * (new_size + 1));
+	//env = malloc(sizeof(char *) * (new_size + 1));
+	//ft_memset(env,0,sizeof(char *) * (new_size + 1));
+	env = ft_calloc(sizeof(char *), new_size);
 	if (!env)
 		return (NULL);
 	i = -1;
@@ -27,8 +28,8 @@ char	**ft_set_env(char **envp, int new_size, int old_size)
 		while (++i < old_size)
 			env[i] = ft_strdup(envp[i]);
 		i--;
-		while (++i < new_size)
-			env[i] = NULL;
+		// while (++i < new_size)
+		// 	env[i] = NULL;
 	}
 	else
 	{
