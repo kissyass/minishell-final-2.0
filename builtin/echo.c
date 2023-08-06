@@ -39,6 +39,13 @@ void	ft_echo(void)
 	free(built.output);
 }
 
+int is_alnum(char c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_')
+		return (1);
+	return (0);
+}
+
 int ft_dollar_echo(int index, t_builtin *built)
 {
 	char *var;
@@ -51,10 +58,13 @@ int ft_dollar_echo(int index, t_builtin *built)
 		built->output = ft_strcat(built->output, ft_itoa(g_ms.status));
 		index += 2;
 	}
+	else if (!built->input[index + 1] || !is_alnum(built->input[index + 1]))
+		built->output = ft_charcat(built->output, built->input[index]);
 	else
 	{
-		while (built->input[++index] && built->input[index] != ' ' && ft_isalnum(built->input[index]) && built->input[index] != '"' && built->input[index] != '\\' && built->input[index] != '\'')
+		while (built->input[++index] && is_alnum(built->input[index]))
 			var = ft_charcat(var, built->input[index]);
+		index--;
 		int i = -1;
 		while (g_ms.env[++i])
 		{

@@ -44,8 +44,8 @@ void	ft_output(t_builtin *built, char quote)
 	i = built->start - 1;
 	while (++i < built->end)
 	{
-		if (built->input[i] == '$')
-			i = ft_dollar_echo(i, built) - 1;
+		if (built->input[i] == '$' && quote == '"')
+			i = ft_dollar_echo(i, built);
 		else if (built->input[i] != '\\')
 			built->output = ft_charcat(built->output, built->input[i]);
 		else
