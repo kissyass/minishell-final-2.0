@@ -8,7 +8,7 @@ static int	pipe_space_check(int len, char *str)
 	while (str[i] == SPACE)
 		i++;
 	if (str[i] == '|')
-		return (-1);
+		return (-2);
 	while (str[len] == SPACE)
 		len--;
 	str = 0;
@@ -24,7 +24,7 @@ int	ft_pipecheck(char *str)
 	i = 0;
 	g_ms.process_count = 0;
 	len = pipe_space_check(ft_strlen(str) - 1, str);
-	if (len == -1 || str[len] == '|')
+	if (len == -2 || str[len] == '|')
 	{
 		token_err(PIPE);
 		return (FALSE);
