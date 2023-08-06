@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_output.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykissiko <ykissiko@student.42istanbul.com  +#+  +:+       +#+        */
+/*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:03:27 by ykissiko          #+#    #+#             */
-/*   Updated: 2023/07/25 17:03:29 by ykissiko         ###   ########.fr       */
+/*   Updated: 2023/08/06 01:42:12 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_output(t_builtin *built, char quote)
 	i = built->start - 1;
 	while (++i < built->end)
 	{
-		if (built->input[i] == '$')
+		if (built->input[i] == '$' && quote == '"')
 			i = ft_dollar_echo(i, built) - 1;
 		else if (built->input[i] != '\\')
 			built->output = ft_charcat(built->output, built->input[i]);
