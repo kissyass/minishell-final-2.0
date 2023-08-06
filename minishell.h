@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:31:15 by ykissiko          #+#    #+#             */
-/*   Updated: 2023/08/05 23:50:11 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/06 03:54:02 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 # include <unistd.h>
 
 # define SPACE 32
-# define TAB '\t'
+# define TAB 9
 # define TRUE 1
 # define FALSE 0
-# define DOLLAR_OP '$'
-# define DOUBLE_QUOTE '"'
-# define SINGLE_QUOTE '\''
+# define DOLLAR_OP 36
+# define DOUBLE_QUOTE 34
+# define SINGLE_QUOTE 39
 # define CHILD_PROCESS 0
 # define MAIN_PROCESS 1
 # define REPLACE 1
@@ -93,7 +93,7 @@ typedef struct s_minishell
 	t_process			*process;
 	char				*input;
 	char				**cmd;
-	int status;
+	int					status;
 }						t_minishell;
 
 extern t_minishell		g_ms;
@@ -154,7 +154,7 @@ t_token					*init_token(char *str, enum e_ttype type);
 // free
 void					free_array(char **arr);
 void					free_token(void);
-void	free_process(void);
+void					free_process(void);
 
 //UTILS
 int						ft_strlen_double(char **str);
@@ -180,17 +180,16 @@ int						is_parent(void);
 
 //ENV
 //set_env
-// char **ft_set_env(char **envp, int size);
 char					**ft_set_env(char **envp, int new_size, int old_size);
 void					set_env(char **env);
 void					set_paths(void);
 char					*get_env(char *str);
 char					*get_path(char *cmd);
-char *exp_dup(char *s);
-char	**ft_set_exp(char **envp, int new_size, int old_size);
+char					*exp_dup(char *s);
+char					**ft_set_exp(char **envp, int new_size, int old_size);
 //env
 void					ft_env(void);
-void ft_env_add(t_builtin *built);
+void					ft_env_add(t_builtin *built);
 
 //PIPES
 void					ft_pipes(t_minishell *mini);
@@ -211,10 +210,10 @@ void					ft_quote(t_builtin *built, char quote, int type);
 int						ft_space_check(int index, char *input);
 int						ft_quotes_index(t_builtin *built, int index,
 							char quote);
-int	skip_flag(char **str);
-char *echo_cmd(int index);
-int ft_dollar_echo(int index, t_builtin *built);
-int is_alnum(char c);
+int						skip_flag(char **str);
+char					*echo_cmd(int index);
+int						ft_dollar_echo(int index, t_builtin *built);
+int						is_alnum(char c);
 //input_output
 int						ft_output_len(char *cmd, char *str);
 int						ft_check_input(t_builtin *built);
@@ -236,7 +235,7 @@ int						ft_export_check(t_builtin *built, int cmd);
 //unset
 void					ft_unset(void);
 void					ft_unset_update(t_builtin *built, int index);
-void ft_unset_env(t_builtin *built);
+void					ft_unset_env(t_builtin *built);
 //exit
 void					ft_exit(char **input);
 //utils
@@ -247,12 +246,12 @@ char					*ft_strdup2(char *str, char *cmd);
 int						ft_isalnum(int c);
 
 //tools
-void	ctrl_bs(int sig);
-void	ctrl_d(char *input);
-void	ctrl_c(int sig);
-void	init_shell(char *input);
+void					ctrl_bs(int sig);
+void					ctrl_d(char *input);
+void					ctrl_c(int sig);
+void					init_shell(char *input);
 
 //pipecheck
-int	ft_pipecheck(char *str);
+int						ft_pipecheck(char *str);
 
 #endif

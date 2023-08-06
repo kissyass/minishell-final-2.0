@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 19:16:54 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/08/06 01:32:07 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/06 04:50:28 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	init_app(char **env)
 	g_ms.env = ft_set_env(env, g_ms.env_size + 1, g_ms.env_size);
 	g_ms.exp_size = ft_strlen_double(env);
 	g_ms.exp = ft_set_exp(env, g_ms.exp_size + 1, g_ms.exp_size);
-	set_env(env);
 	set_paths();
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykissiko <ykissiko@student.42istanbul.com  +#+  +:+       +#+        */
+/*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:37:07 by ykissiko          #+#    #+#             */
-/*   Updated: 2023/08/02 14:37:08 by ykissiko         ###   ########.fr       */
+/*   Updated: 2023/08/06 04:16:56 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_unset(void)
 {
 	t_builtin	built;
-	t_builtin exp_built;
+	t_builtin	exp_built;
 
 	built.env_size = g_ms.env_size;
 	built.env = ft_set_env(g_ms.env, g_ms.env_size, g_ms.env_size);
@@ -27,13 +27,14 @@ void	ft_unset(void)
 	ft_free_array_char(g_ms.exp, g_ms.exp_size);
 	g_ms.env = ft_set_env(built.env, built.env_size, built.env_size);
 	g_ms.env_size = built.env_size;
-	g_ms.exp = ft_set_env(exp_built.env, exp_built.env_size, exp_built.env_size);
+	g_ms.exp = ft_set_env(exp_built.env, exp_built.env_size,
+			exp_built.env_size);
 	g_ms.exp_size = exp_built.env_size;
 	ft_free_array_char(built.env, built.env_size);
 	ft_free_array_char(exp_built.env, exp_built.env_size);
 }
 
-void ft_unset_env(t_builtin *built)
+void	ft_unset_env(t_builtin *built)
 {
 	if (g_ms.cmd[1])
 	{

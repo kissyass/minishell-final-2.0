@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 20:02:13 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/08/04 22:01:43 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/06 04:50:24 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ char	**ft_set_env(char **envp, int new_size, int old_size)
 	return (env);
 }
 
-char *exp_dup(char *s)
+char	*exp_dup(char *s)
 {
-	int i;
-	char *str;
+	int		i;
+	char	*str;
 
 	str = ft_calloc(sizeof(char), 1);
 	i = -1;
@@ -72,22 +72,6 @@ char	**ft_set_exp(char **envp, int new_size, int old_size)
 			env[i] = exp_dup(envp[i]);
 	}
 	return (env);
-}
-
-void	set_env(char **env)
-{
-	size_t	i;
-	size_t	len;
-	char	**head;
-
-	head = env;
-	while (*head)
-		head++;
-	len = head - env;
-	g_ms.env = ft_calloc(sizeof(char **), len + 1);
-	i = -1;
-	while (++i < len)
-		g_ms.env[i] = ft_strdup(env[i]);
 }
 
 char	*split_env(char *str)

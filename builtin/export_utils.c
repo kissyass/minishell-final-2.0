@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykissiko <ykissiko@student.42istanbul.com  +#+  +:+       +#+        */
+/*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 13:34:40 by ykissiko          #+#    #+#             */
-/*   Updated: 2023/08/02 13:34:42 by ykissiko         ###   ########.fr       */
+/*   Updated: 2023/08/06 04:53:07 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_old_var(t_builtin *built, int index, int cmd)
 		if (ft_cmdcmp(name[0], built->var))
 		{
 			ft_export_var(built, index, cmd);
-			if (cmd == 1)
+			if (cmd <= 1)
 			{
 				free(built->env[i]);
 				built->env[i] = ft_strdup(built->var);

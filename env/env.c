@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykissiko <ykissiko@student.42istanbul.com  +#+  +:+       +#+        */
+/*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:11:12 by ykissiko          #+#    #+#             */
-/*   Updated: 2023/08/02 16:11:13 by ykissiko         ###   ########.fr       */
+/*   Updated: 2023/08/06 04:17:23 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	ft_env(void)
 		printf("%s\n", g_ms.env[i]);
 }
 
-void ft_env_add(t_builtin *built)
+void	ft_env_add(t_builtin *built)
 {
-	t_builtin env_built;
+	t_builtin	env_built;
 
 	env_built.output = ft_strdup(built->output);
 	env_built.env_size = g_ms.env_size;
@@ -33,7 +33,8 @@ void ft_env_add(t_builtin *built)
 		return ;
 	ft_export_check(&env_built, 0);
 	ft_free_array_char(g_ms.env, g_ms.env_size);
-	g_ms.env = ft_set_env(env_built.env, env_built.env_size, env_built.env_size);
+	g_ms.env = ft_set_env(env_built.env, env_built.env_size,
+			env_built.env_size);
 	g_ms.env_size = env_built.env_size;
 	free(env_built.output);
 	free(env_built.var);
