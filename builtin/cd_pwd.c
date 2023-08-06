@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   cd_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykissiko <ykissiko@student.42istanbul.com  +#+  +:+       +#+        */
+/*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:12:04 by ykissiko          #+#    #+#             */
-/*   Updated: 2023/07/25 17:12:05 by ykissiko         ###   ########.fr       */
+/*   Updated: 2023/08/06 01:43:09 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_cd(void)
 {
 	if (!g_ms.cmd[1])
 		return ;
-	if (g_ms.cmd[1][0] != '.' && g_ms.cmd[1][0] != '~')
+	if (g_ms.cmd[1][0] != '~')
 	{
 		if (chdir(g_ms.cmd[1]) != 0)
 		{
@@ -30,18 +30,14 @@ void	ft_cd(void)
 
 void	ft_pwd(void)
 {
-	char	*pwd;
+	char	*result;
 
-	if (g_ms.cmd[1])
-	{
-		printf("pwd:too many arguments\n");
-		return ;
-	}
-	pwd = ft_calloc(sizeof(PATH_MAX), 1);
-	if (!pwd)
-		return ;
-	getcwd(pwd, PATH_MAX);
-	printf("%s\n", pwd);
-	free(pwd);
-	return ;
+	result = getcwd((void *)0, 0);
+	if (!result)
+		perror("minishell ");
+	else
+		printf("%s\n", result);
+	free(result);
+	if (!is_parent())
+		exit(g_ms.exit_code);
 }
