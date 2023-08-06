@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:06:43 by ykissiko          #+#    #+#             */
-/*   Updated: 2023/07/28 19:24:32 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/06 01:17:52 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int ft_dollar_echo(int index, t_builtin *built)
 	var = ft_calloc(sizeof(char), 1);
 	if (built->input[index + 1] == '?')
 	{
-		built->output = ft_strcat(built->output, ft_itoa(g_ms.status));
+		built->output = ft_strcat(built->output, ft_itoa(g_ms.exit_code));
 		index += 2;
 	}
 	else if (!built->input[index + 1] || !is_alnum(built->input[index + 1]))

@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 19:40:26 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/08/06 00:42:08 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/06 00:56:42 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	close_heredoc(int sig)
 
 void	heredoc(int *fd, char *endline)
 {
-	//char		*input;
+	char		*input;
 	static int	start = 0;
 
 	if (start)
@@ -36,17 +36,15 @@ void	heredoc(int *fd, char *endline)
 	while (1)
 	{
 		signal(SIGINT, &close_heredoc);
-		g_ms.input = readline("heredoc>> ");
-		printf ("%s\n", endline);
-		printf ("%s\n", g_ms.input);
-		if (!g_ms.input || ft_cmdcmp(g_ms.input, endline) || g_ms.ignore)
+		input = readline("heredoc>> ");
+		if (!input || ft_cmdcmp(input, endline) || g_ms.ignore)
 		{
-			free(g_ms.input);
+			free(input);
 			break ;
 		}
-		write(fd[1], g_ms.input, ft_strlen(g_ms.input));
+		write(fd[1], input, ft_strlen(input));
 		write(fd[1], "\n", 1);
-		free(g_ms.input);
+		free(input);
 	}
 	close(fd[1]);
 }

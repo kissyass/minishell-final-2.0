@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 20:40:57 by aeroglu           #+#    #+#             */
-/*   Updated: 2023/08/05 23:45:43 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/06 01:18:14 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	get_builtin(t_process *process)
 void	wait_cmd(void)
 {
 	t_process	*process;
-	int			status;
 
 	process = g_ms.process;
 	close_all_fd();
@@ -39,9 +38,8 @@ void	wait_cmd(void)
 	{
 		if (process->pid != -1)
 		{
-			waitpid(process->pid, &status, 0);
-			g_ms.status = WEXITSTATUS(status);
-			g_ms.exit_code = g_ms.status;
+			waitpid(process->pid, &g_ms.exit_code, 0);
+			g_ms.exit_code = WEXITSTATUS(g_ms.exit_code);
 		}
 		process = process->next;
 	}
