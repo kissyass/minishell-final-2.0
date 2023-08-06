@@ -39,7 +39,7 @@ void	heredoc(int *fd, char *endline)
 		g_ms.input = readline("heredoc>> ");
 		printf ("%s\n", endline);
 		printf ("%s\n", g_ms.input);
-		if (!g_ms.input || ft_strcmp(g_ms.input, endline) || g_ms.ignore)
+		if (!g_ms.input || ft_cmdcmp(g_ms.input, endline) || g_ms.ignore)
 		{
 			free(g_ms.input);
 			break ;
