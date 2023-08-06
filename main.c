@@ -19,6 +19,10 @@ void	init_app(char **env)
 	g_ms.exit_code = 0;
 	g_ms.parent_pid = getpid();
 	g_ms.paths = NULL;
+	g_ms.env_size = ft_strlen_double(env);
+	g_ms.env = ft_set_env(env, g_ms.env_size + 1, g_ms.env_size);
+	g_ms.exp_size = ft_strlen_double(env);
+	g_ms.exp = ft_set_exp(env, g_ms.exp_size + 1, g_ms.exp_size);
 	set_env(env);
 	set_paths();
 }

@@ -186,6 +186,8 @@ void					set_env(char **env);
 void					set_paths(void);
 char					*get_env(char *str);
 char					*get_path(char *cmd);
+char *exp_dup(char *s);
+char	**ft_set_exp(char **envp, int new_size, int old_size);
 //env
 void					ft_env(void);
 void ft_env_add(t_builtin *built);
@@ -212,6 +214,7 @@ int						ft_quotes_index(t_builtin *built, int index,
 int	skip_flag(char **str);
 char *echo_cmd(int index);
 int ft_dollar_echo(int index, t_builtin *built);
+int is_alnum(char c);
 //input_output
 int						ft_output_len(char *cmd, char *str);
 int						ft_check_input(t_builtin *built);
