@@ -40,12 +40,9 @@ void ft_unset_env(t_builtin *built)
 		built->input = ft_strdup2(g_ms.input, "unset");
 		built->output = ft_calloc(sizeof(char), 1);
 		built->var = ft_calloc(sizeof(char), 1);
-		if (!built->output || !built->var)
-			return ;
 		if (ft_export_output(built, "export") != 0)
 			return ;
 		ft_export_check(built, 2);
-		//ft_sort_export(&built);
 	}
 }
 
@@ -55,8 +52,9 @@ void	ft_unset_update(t_builtin *built, int index)
 	while (++index < built->env_size - 1)
 	{
 		free(built->env[index]);
-		built->env[index] = built->env[index + 1];
+		built->env[index] = ft_strdup(built->env[index + 1]);
 	}
+	free(built->env[index]);
 	built->env = ft_set_env(built->env, built->env_size - 1, built->env_size);
 	built->env_size--;
 	free(built->input);

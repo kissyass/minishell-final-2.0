@@ -78,7 +78,8 @@ int	ft_old_var(t_builtin *built, int index, int cmd)
 			ft_free_array_char(name, ft_strlen_double(name));
 			return (1);
 		}
-		ft_free_array_char(name, ft_strlen_double(name));
+		else
+			ft_free_array_char(name, ft_strlen_double(name));
 	}
 	return (0);
 }
