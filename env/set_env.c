@@ -17,8 +17,6 @@ char	**ft_set_env(char **envp, int new_size, int old_size)
 	char	**env;
 	int		i;
 
-	//env = malloc(sizeof(char *) * (new_size + 1));
-	//ft_memset(env,0,sizeof(char *) * (new_size + 1));
 	env = ft_calloc(sizeof(char *), new_size);
 	if (!env)
 		return (NULL);
@@ -28,13 +26,50 @@ char	**ft_set_env(char **envp, int new_size, int old_size)
 		while (++i < old_size)
 			env[i] = ft_strdup(envp[i]);
 		i--;
-		// while (++i < new_size)
-		// 	env[i] = NULL;
 	}
 	else
 	{
 		while (++i < new_size)
 			env[i] = ft_strdup(envp[i]);
+	}
+	return (env);
+}
+
+char *exp_dup(char *s)
+{
+	int i;
+	char *str;
+
+	str = ft_calloc(sizeof(char), 1);
+	i = -1;
+	while (s[++i] && s[i] != '=')
+		str = ft_charcat(str, s[i]);
+	str = ft_strcat(str, "=\"");
+	while (s[++i])
+		str = ft_charcat(str, s[i]);
+	str = ft_charcat(str, '"');
+	return (str);
+}
+
+char	**ft_set_exp(char **envp, int new_size, int old_size)
+{
+	char	**env;
+	int		i;
+
+	env = ft_calloc(sizeof(char *), new_size);
+	if (!env)
+		return (NULL);
+	i = -1;
+	if (new_size > old_size)
+	{
+		while (++i < old_size)
+			env[i] = exp_dup(envp[i]);
+		i--;
+	}
+	else
+	{
+		while (++i < new_size)
+			env[i] = exp_dup(envp[i]);
 	}
 	return (env);
 }
