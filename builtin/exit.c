@@ -6,7 +6,7 @@
 /*   By: aeroglu <aeroglu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:18:34 by ykissiko          #+#    #+#             */
-/*   Updated: 2023/08/05 23:48:41 by aeroglu          ###   ########.fr       */
+/*   Updated: 2023/08/06 03:38:30 by aeroglu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	ft_exit(char **input)
 				g_ms.exit_code = 1;
 				return ;
 			}
+			write(2, "exit\n", 6);
 			exit(ft_atoi(input[1]) % 256);
 		}
 		write(2, "exit\nminishell: exit: numeric argument required\n", 48);
