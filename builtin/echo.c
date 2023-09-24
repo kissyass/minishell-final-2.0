@@ -35,7 +35,7 @@ void	ft_echo(void)
 			printf("%s", built.output);
 		}
 	}
-	if (g_ms.cmd[1] && !ft_cmdcmp(g_ms.cmd[1], "-n"))
+	if (g_ms.flag == 0)
 		printf("\n");
 	free(built.input);
 	free(built.output);
@@ -52,10 +52,8 @@ int	is_alnum(char c)
 int	echo_dollar_ft(int index, t_builtin *built, char *var)
 {
 	char	**name;
-	char	*var;
 	int		i;
 	int		j;
-	int		i;
 
 	while (built->input[++index] && is_alnum(built->input[index]))
 		var = ft_charcat(var, built->input[index]);
@@ -89,9 +87,7 @@ int	ft_dollar_echo(int index, t_builtin *built)
 	else if (!built->input[index + 1] || !is_alnum(built->input[index + 1]))
 		built->output = ft_charcat(built->output, built->input[index]);
 	else
-	{
 		index = echo_dollar_ft(index, built, var);
-	}
 	return (index);
 }
 

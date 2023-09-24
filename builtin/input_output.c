@@ -56,6 +56,7 @@ void	ft_output(t_builtin *built, char quote)
 int	ft_check_input(t_builtin *built)
 {
 	int	i;
+	int j;
 
 	i = -1;
 	while (built->input[++i])
@@ -67,9 +68,15 @@ int	ft_check_input(t_builtin *built)
 			i = ft_quotes_index(built, i, '"');
 		else
 		{
+			j = 0;
 			i = ft_space_check(i, built->input);
 			if (built->input[i] == '$')
-				i = ft_dollar_echo(i, built) - 1;
+			{
+				i = ft_dollar_echo(i, built);
+				j = ft_strlen(built->output);
+				if (built->output[j - 1] == 32 && built->input[i + 1] && built->input[i + 1] == 32)
+					i = ft_space_check(i + 1, built->input);
+			}
 			else
 				built->output = ft_charcat(built->output, built->input[i]);
 		}

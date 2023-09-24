@@ -94,6 +94,7 @@ typedef struct s_minishell
 	char				*input;
 	char				**cmd;
 	int					status;
+	int					flag;
 }						t_minishell;
 
 extern t_minishell		g_ms;

@@ -18,6 +18,7 @@ int	skip_flag(char **str)
 	int	j;
 
 	i = 1;
+	g_ms.flag = 0;
 	while (str[i])
 	{
 		if (str[i][0] == '-' && str[i][0])
@@ -28,7 +29,10 @@ int	skip_flag(char **str)
 			if (str[i][j] == '\0')
 			{
 				if (j > 1 && str[i][j - 1] == 'n')
+				{
 					i++;
+					g_ms.flag = 1;
+				}
 			}
 			else
 				return (i);
